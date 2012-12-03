@@ -2,7 +2,7 @@
 This comes from https://github.com/nicklasgav/Sphero-Desktop-API .
 If you want to use this code I suggest you look at that code rather 
 than this incomplete and undocumented code based of that project. 
-The things written in this file (excluding this disclaimer)and most 
+The things written in this file (excluding this disclaimer) and most 
 of the documentation and codes are written by him.
 //Gurr3
 
