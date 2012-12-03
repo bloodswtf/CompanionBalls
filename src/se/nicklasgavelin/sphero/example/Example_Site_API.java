@@ -1,49 +1,38 @@
+package se.nicklasgavelin.sphero.example;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.activation.CommandObject;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
-import experimental.sphero.macro.Rotate;
 import se.nicklasgavelin.bluetooth.Bluetooth;
 import se.nicklasgavelin.bluetooth.Bluetooth.EVENT;
 import se.nicklasgavelin.bluetooth.BluetoothDevice;
 import se.nicklasgavelin.bluetooth.BluetoothDiscoveryListener;
 import se.nicklasgavelin.sphero.Robot;
 import se.nicklasgavelin.sphero.RobotListener;
-import se.nicklasgavelin.sphero.command.AbortMacroCommand;
 import se.nicklasgavelin.sphero.command.CommandMessage;
 import se.nicklasgavelin.sphero.command.FrontLEDCommand;
-import se.nicklasgavelin.sphero.command.RollCommand;
-import se.nicklasgavelin.sphero.command.SpinLeftCommand;
-import se.nicklasgavelin.sphero.command.SpinRightCommand;
 import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
 import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
-import se.nicklasgavelin.sphero.macro.MacroObject;
-import se.nicklasgavelin.sphero.macro.command.*;
 import se.nicklasgavelin.sphero.response.ResponseMessage;
 import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 
 /**
  * Simple test class to test the Sphero API
  * 
- * @author Nicklas Gavelin, nicklas.gavelin@gmail.com, Luleå University of Technology
+ * @author Nicklas Gavelin, nicklas.gavelin@gmail.com, LuleÃ¥ University of Technology
  */
 public class Example_Site_API extends JFrame
 {
-	
 	private static final long serialVersionUID = 6998786554264771793L;
 	
 	// Internal storage
 	private int responses = 0;
 	private ConnectThread ct;
-	private JButton connectButton, disconnectButton, panicButton, stopButton;
+	private JButton connectButton, disconnectButton;
 
 	/**
 	 * Main method
@@ -63,15 +52,12 @@ public class Example_Site_API extends JFrame
 	public Example_Site_API()
 	{
 		super( "Example API usage" );
-		this.setLayout( new GridLayout( 4, 1 ) );
+		this.setLayout( new GridLayout( 2, 1 ) );
 
 		// Connect button
 		connectButton = new JButton( "Connect to available devices" );
 		disconnectButton = new JButton( "Disconnect from all devices" );
-		panicButton = new JButton("PANIC!");
-		stopButton = new JButton("STOP");
-		
-		
+
 		// Bind action to our connect button
 		connectButton.addActionListener( new ActionListener() {
 			@Override
@@ -105,43 +91,11 @@ public class Example_Site_API extends JFrame
 				disconnectButton.setEnabled( false );
 			}
 		} );
-		
-		// Bind action to the disconnect button
-		panicButton.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed( ActionEvent e )
-			{
-				MacroObject m = new MacroObject();
-				//m.addCommand(command);
-				
-				
-				ct.r.setRGBLedColor(Color.GREEN);
-				ct.r.setRGBLedColor(Color.ORANGE);
-				
-				//can some times overwrite the next command
-//				ct.r.sendCommand(new SpinLeftCommand(100));
-				
-			}
-		} );
-		stopButton.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed( ActionEvent e )
-			{
-				MacroObject m = new MacroObject();
-				//m.addCommand(command);
-				
-				
-				ct.r.sendCommand(new AbortMacroCommand());
-//				ct.stopThread();
-			}
-		} );
 
 		// Add buttons to our GUI
 		this.add( connectButton );
 		this.add( disconnectButton );
-		this.add( panicButton );
-		this.add(stopButton);
-		
+
 		// Set some default stuff
 		this.pack();
 		this.setVisible( true );
@@ -166,7 +120,6 @@ public class Example_Site_API extends JFrame
 	private class ConnectThread extends Thread implements BluetoothDiscoveryListener, Runnable, RobotListener
 	{
 		// Internal storage
-		Robot r;
 		private Bluetooth bt;
 		private boolean stop = false;
 		private Collection<Robot> robots;
@@ -209,52 +162,27 @@ public class Example_Site_API extends JFrame
 				// connect directly to a given Sphero
 
 				// // ## START UNCOMMENT ##
-//				 final String bluetoothAddress = "0006664438B8";
-//				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
-//				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
-//				
-//				 // Create the robot from the bluetooth device
-//				 r = new Robot( btd );
-//				
-//				 // Try to connect to the robot
-//				 if ( r.connect() )
-//				 {
-//				 // Add ourselves as listeners
-//				 r.addListener( this );
-//				
-//				 // Send a rgb transition command macro
-//				 r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
-//				
-//				 // Send a direct command
-//				 r.sendCommand( new FrontLEDCommand( 1F ) );
-//				 }
+				// final String bluetoothAddress = "0006664438B8";
+				// BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
+				// bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
+				//
+				// // Create the robot from the bluetooth device
+				// Robot r = new Robot( btd );
+				//
+				// // Try to connect to the robot
+				// if ( r.connect() )
+				// {
+				// // Add ourselves as listeners
+				// r.addListener( this );
+				//
+				// // Send a rgb transition command macro
+				// r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
+				//
+				// // Send a direct command
+				// r.sendCommand( new FrontLEDCommand( 1F ) );
+				// }
 				// // ## END UNCOMMENT ##
-				
-				 /*
-				  * 
-				  * Added for testing, not part of the original file !!
-				  * 
-				  */
-				 
-				// Create our macro object (seen as a command)
-				 /*MacroObject mo = new MacroObject();
 
-				 // Add macro commands to the macro object
-				 mo.addCommand( new Delay( 2000 ) );
-				 mo.addCommand( new RGBSD2( Color.RED ) );
-				 mo.addCommand( new Delay( 2000 ) );
-				 mo.addCommand( new RGBSD2( Color.BLUE ) );
-				 mo.addCommand( new Delay( 2000 ) );
-
-				 // Send the macro object to the Sphero
-				 r.sendCommand( mo );
-				 */
-				 /*
-				  * 
-				  * End of added stuffs
-				  * 
-				  */
-				 
 				// Run forever, euheuheuh!
 				while( !stop )
 				{

@@ -43,7 +43,7 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 		Robot r;
 		private Bluetooth bt;
 		private boolean stop = false;
-		public Collection<Robot> robots;
+		public ArrayList<Robot> robots;
 		
 		public ConnectThread()
 		{
@@ -79,7 +79,6 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 				// any devices
 				bt = new Bluetooth( this, Bluetooth.SERIAL_COM );
 				bt.discover(); // # COMMENT THIS IF UNCOMMENTING THE BELOW AREA #
-
 				// Uncomment the code below and comment out the bt.discover() line above
 				// to
 				// connect directly to a given Sphero
@@ -199,7 +198,7 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 					}
 				}
 			}
-			isCompleted = true;
+
 			// Disable the thread and set connected button state
 			if( robots.isEmpty() )
 			{
@@ -208,6 +207,7 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 				//setConnectEnabled( true );
 				//This might be used
 			}
+			isCompleted = true;
 		}
 
 		/**
