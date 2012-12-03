@@ -202,32 +202,32 @@ public class Example_Site_API extends JFrame
 				// Will perform a bluetooth discovery before connecting to
 				// any devices
 				bt = new Bluetooth( this, Bluetooth.SERIAL_COM );
-//				bt.discover(); // # COMMENT THIS IF UNCOMMENTING THE BELOW AREA #
+				bt.discover(); // # COMMENT THIS IF UNCOMMENTING THE BELOW AREA #
 
 				// Uncomment the code below and comment out the bt.discover() line above
 				// to
 				// connect directly to a given Sphero
 
 				// // ## START UNCOMMENT ##
-				 final String bluetoothAddress = "0006664438B8";
-				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
-				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
-				
-				 // Create the robot from the bluetooth device
-				 r = new Robot( btd );
-				
-				 // Try to connect to the robot
-				 if ( r.connect() )
-				 {
-				 // Add ourselves as listeners
-				 r.addListener( this );
-				
-				 // Send a rgb transition command macro
-				 r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
-				
-				 // Send a direct command
-				 r.sendCommand( new FrontLEDCommand( 1F ) );
-				 }
+//				 final String bluetoothAddress = "0006664438B8";
+//				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
+//				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
+//				
+//				 // Create the robot from the bluetooth device
+//				 r = new Robot( btd );
+//				
+//				 // Try to connect to the robot
+//				 if ( r.connect() )
+//				 {
+//				 // Add ourselves as listeners
+//				 r.addListener( this );
+//				
+//				 // Send a rgb transition command macro
+//				 r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
+//				
+//				 // Send a direct command
+//				 r.sendCommand( new FrontLEDCommand( 1F ) );
+//				 }
 				// // ## END UNCOMMENT ##
 				
 				 /*

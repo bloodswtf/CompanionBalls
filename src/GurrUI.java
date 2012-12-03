@@ -45,7 +45,7 @@ public class GurrUI extends JFrame {
 	private static String DisconnectMAP = 	"2";
 	
 	//unbinded - do as above
-	private static String B1MAP = 	"";
+	private static String AddrobottoArrayMAP = 	"";
 	private static String B2MAP = 	"";
 	private static String B3MAP = 	"";
 	private static String B4MAP = 	"";
@@ -69,7 +69,7 @@ public class GurrUI extends JFrame {
 	private static String Connect =    "Connect ALL THE THINGS      ";
 	private static String Disconnect = "Disconnect ALL THE THINGS";
 
-	private static String B1 = "B1";
+	private static String AddrobottoArray = "Add Robots To Array";
 	private static String B2 = "B2";
 	private static String B3 = "B3";
 	private static String B4 = "B4";
@@ -78,8 +78,8 @@ public class GurrUI extends JFrame {
 	// the buttons
 	private JButton ForwardB, BackwardB, RightB, LeftB,
 	StopB, PanicB, SpinB, ChangeColorB,
-	ConnectB, DisconnectB,
-	B1B, B2B, B3B, B4B
+	ConnectB, AddRobotsToListB, DisconnectB,
+	AddrobottoArrayB, B2B, B3B, B4B
 	;
 
 	//-buttons part 1
@@ -96,7 +96,7 @@ public class GurrUI extends JFrame {
 	private ConnectButtonHandler ConnectbHandler;
 	private DisconnectButtonHandler Disconnectbhandler;
 	//buttons part 4
-	private B1ButtonHandler B1bHandler;
+	private AddrobottoArrayButtonHandler AddrobottoArraybHandler;
 	private B2ButtonHandler B2bHandler;
 	private B3ButtonHandler B3bHandler;
 	private B4ButtonHandler B4bHandler;
@@ -147,7 +147,7 @@ public class GurrUI extends JFrame {
 		addbuttonslistener(ChangeColorB, ChangeColorMAP);
 		addbuttonslistener(ConnectB, ConnectMAP);
 		addbuttonslistener(DisconnectB, DisconnectMAP);
-		addbuttonslistener(B1B, B1MAP);
+		addbuttonslistener(AddrobottoArrayB, AddrobottoArrayMAP);
 		addbuttonslistener(B2B, B2MAP);
 		addbuttonslistener(B3B, B3MAP);
 		addbuttonslistener(B4B, B4MAP);
@@ -229,13 +229,13 @@ public class GurrUI extends JFrame {
 		}
 	}
 	private class SpinButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {			
+		public void actionPerformed(ActionEvent e) {
 			m.rollcircle();
 		}
 	}
 	private class ChangeColorButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-
+			m.r.setRGBLedColor(Color.ORANGE);
 		}
 	}
 
@@ -243,9 +243,6 @@ public class GurrUI extends JFrame {
 	private class ConnectButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
 			ct.start();
-			while(ct.isAlive()){}
-			Iterator<Robot> i = ct.getRobotArray().iterator();
-			m = new Macro(i.next());
 			// Toggle our button
 			//connectButton.setEnabled( false );
 			//disconnectButton.setEnabled( true );
@@ -262,9 +259,11 @@ public class GurrUI extends JFrame {
 		}
 	}
 
-	private class B1ButtonHandler implements ActionListener {
+	private class AddrobottoArrayButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-		
+			Iterator<Robot> i = ct.getRobotArray().iterator();
+			m = new Macro(i.next());
+			System.out.println(m.r.getId() + " was added");
 		}
 	}
 
@@ -353,10 +352,10 @@ public class GurrUI extends JFrame {
 		DisconnectB.addActionListener(Disconnectbhandler);
 		DisconnectB.setAlignmentX(LEFT_ALIGNMENT);
 		
-		B1B = new JButton(B1);
-		B1bHandler= new B1ButtonHandler();
-		B1B.addActionListener(B1bHandler);
-		B1B.setAlignmentX(RIGHT_ALIGNMENT);
+		AddrobottoArrayB = new JButton(AddrobottoArray);
+		AddrobottoArraybHandler= new AddrobottoArrayButtonHandler();
+		AddrobottoArrayB.addActionListener(AddrobottoArraybHandler);
+		AddrobottoArrayB.setAlignmentX(LEFT_ALIGNMENT);
 		
 		B2B = new JButton(B2);
 		B2bHandler= new B2ButtonHandler();
@@ -401,12 +400,13 @@ public class GurrUI extends JFrame {
 	private void addbuttonsConnectDisconnect(Container C){
 		C.add(ConnectB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(AddrobottoArrayB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(DisconnectB);
 	}
 	
 	private void addbuttonsB14(Container C){
-		C.add(Box.createRigidArea(new Dimension(0, 5)));
-		C.add(B1B);
+		
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(B2B);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
