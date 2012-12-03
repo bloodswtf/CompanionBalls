@@ -1,4 +1,4 @@
-# Notes from Gurr3
+# Notes from Gurr3 [Important]
 This comes from https://github.com/nicklasgav/Sphero-Desktop-API .
 If you want to use this code I suggest you look at that code rather 
 than this incomplete and undocumented code based of that project. 
