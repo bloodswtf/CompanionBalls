@@ -7,8 +7,6 @@ of the documentation and codes are written by him.
 //Gurr3
 
 
-OMGWTFDUDESERIÖÖÖÖSLY
-öpö
 # Development Quick Start Guide
 
 ## Overview
