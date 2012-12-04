@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -70,7 +71,7 @@ public class GurrUI extends JFrame {
 	private static String Disconnect = "Disconnect ALL THE THINGS";
 
 	private static String AddrobottoArray = "Add Robots To Array";
-	private static String B2 = "B2";
+	private static String B2 = "Get some kind of response";
 	private static String B3 = "B3";
 	private static String B4 = "B4";
 	//end configs
@@ -175,7 +176,7 @@ public class GurrUI extends JFrame {
 	//------------------------------------------------------buttons part 1
 	private class ForwardButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-			System.out.println("Forward");
+			m.rollForward();
 		}
 	}
 	private class BackwardButtonHandler implements ActionListener {
@@ -185,20 +186,19 @@ public class GurrUI extends JFrame {
 	}
 	private class RightButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-
+			m.rollRight();
 		}
 	}
 	private class LeftButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-
+			m.rollLeft();
 		}
 	}
 
 	//------------------------------------------------------buttons part 2
 	private class StopButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-			System.out.println("STOP");
-			
+			m.stop();
 		}
 	}
 	private class PanicButtonHandler implements ActionListener {
@@ -234,8 +234,8 @@ public class GurrUI extends JFrame {
 		}
 	}
 	private class ChangeColorButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {			
-			m.r.setRGBLedColor(Color.ORANGE);
+		public void actionPerformed(ActionEvent e) {
+			m.changeColor(new Color(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255)));
 		}
 	}
 
@@ -268,8 +268,9 @@ public class GurrUI extends JFrame {
 	}
 
 	private class B2ButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {			
-		
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Button Pushed");
+			m.getDataFromGyro();
 		}
 	}
 	
