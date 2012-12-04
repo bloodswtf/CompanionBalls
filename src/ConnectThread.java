@@ -29,6 +29,7 @@ import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.*;
 import se.nicklasgavelin.sphero.response.ResponseMessage;
 import se.nicklasgavelin.sphero.response.InformationResponseMessage;
+import se.nicklasgavelin.sphero.response.information.DataResponse;
 
 /**
  * Simple test class to test the Sphero API
@@ -180,7 +181,7 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 							robots.add( r );
 
 							System.out.println( "Connected to " + d.getName() + " : " + d.getAddress() );
-							r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
+							r.rgbTransition( 255, 0, 0, 0, 255, 0, 200 );
 
 							// Send direct command
 							r.sendCommand( new FrontLEDCommand( 1 ) );
@@ -270,11 +271,27 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 		{
 			System.out.println( "Received event: " + code );
 		}
-
+		DataResponse dr;
 		@Override
 		public void informationResponseReceived( Robot r, InformationResponseMessage response )
 		{
-			// Information response (Ex. Sensor data)
+			//From forum.gosphero.com/archive/index.php/t-806.html
+			dr = ( DataResponse ) response;
+			byte[] data = dr.getSensorData();
+			System.out.println(" ");
+			//for (int i = 0; i < data.length; i++) {
+				
+				System.out.print(data[1]+" ");
+				System.out.print(data[3]+" ");
+				System.out.print(data[5]+" ");
+				System.out.print("   Gyro: ");
+				System.out.print(data[2]+" ");
+				System.out.print(data[4]+" ");
+				System.out.print(data[6]);
+				
+				
+			//}
+			
 		}
 	}
 
