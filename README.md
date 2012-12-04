@@ -8,7 +8,11 @@ of the documentation and codes are written by him.
 
 
 OMGWTFDUDESERIÖÖÖÖSLY
-öpö
+öpöx
+
+
+MEN NU DÅ
+OCH SEN DÅ
 # Development Quick Start Guide
 
 ## Overview
