@@ -1,8 +1,5 @@
-.svn/**/*
-.svn
-.svn/*
-build/
-dist/
-bin/
-nbproject
-latest.jar
+*.class
+
+# Package Files #
+*.war
+*.ear
