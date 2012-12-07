@@ -176,22 +176,22 @@ public class GurrUI extends JFrame {
 	//------------------------------------------------------buttons part 1
 	private class ForwardButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-			m.rollForward();
+			m.maze("forward");
 		}
 	}
 	private class BackwardButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-			System.out.println("Backward");
+			m.maze("backward");
 		}
 	}
 	private class RightButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-			m.rollRight();
+			m.maze("right");
 		}
 	}
 	private class LeftButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-			m.rollLeft();
+			m.maze("left");
 		}
 	}
 

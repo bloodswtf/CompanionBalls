@@ -3,13 +3,16 @@ import java.awt.Color;
 
 import se.nicklasgavelin.sphero.Robot;
 import se.nicklasgavelin.sphero.command.SetDataStreamingCommand;
+import se.nicklasgavelin.sphero.command.SpinLeftCommand;
+import se.nicklasgavelin.sphero.command.SpinRightCommand;
+
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.*;
 
 public class Macro {
 	Robot r;
-	private int currentHeading = 0;
-	private double speed = 0.4; 
+	private int heading=0;
+	private double speed= 0.1;
 	
 	public Macro(Robot spheroRobot){
 		this.r = spheroRobot;
@@ -67,5 +70,28 @@ public class Macro {
 	public void getDataFromGyro()	{
 		SetDataStreamingCommand sds = new SetDataStreamingCommand(210, 1, SetDataStreamingCommand.DATA_STREAMING_MASKS.GYRO.ALL.RAW, 100);
 		r.sendCommand(sds);
+	}
+void maze(String source){
+	System.out.println(source);
+		MacroObject m = new MacroObject();
+		if (source.equals("forward")){
+			speed=speed+0.02;
+			
+		} else if (source.equals("backward")){
+			speed=speed-0.02;
+		} else if (source.equals("left")){
+			heading = heading +270;
+			//m.addCommand(new SpinRightCommand(90));
+			m.addCommand(new Delay(10));
+		} else if (source.equals("right")){
+			heading = heading +90;
+		}
+		heading = heading % 360;
+		if (speed <0){
+			speed = 0;
+		}
+		
+		m.addCommand(new Roll(speed,heading,0));
+		r.sendCommand(m);
 	}
 }
