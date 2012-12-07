@@ -26,6 +26,7 @@ import se.nicklasgavelin.sphero.macro.command.RGBSD2;
 import se.nicklasgavelin.sphero.macro.command.Roll;
 import se.nicklasgavelin.sphero.Robot;
 
+
 public class GurrUI extends JFrame {
 	//Settings
 	private ConnectThread ct;
@@ -203,7 +204,10 @@ public class GurrUI extends JFrame {
 	}
 	private class PanicButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {	
-			m.rollfwd();
+//			m.rollfwd();
+			
+			m.spinLeftCommand();
+			
 			/*try {
 				int currentheading=0;
 				Robot r = new Robot();
@@ -270,7 +274,7 @@ public class GurrUI extends JFrame {
 	private class B2ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Button Pushed");
-			m.getDataFromGyro();
+			m.getDataFromSensors();
 		}
 	}
 	
