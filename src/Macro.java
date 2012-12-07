@@ -41,13 +41,14 @@ public class Macro {
 		
 		
 	}
-	void maze(String source){
-		
+void maze(String source){
+	System.out.println(source);
 		MacroObject m = new MacroObject();
 		if (source.equals("forward")){
-			speed=speed+0.1;
+			speed=speed+0.02;
+			
 		} else if (source.equals("backward")){
-			speed=speed-0.1;
+			speed=speed-0.02;
 		} else if (source.equals("left")){
 			heading = heading +270;
 			//m.addCommand(new SpinRightCommand(90));
@@ -61,5 +62,6 @@ public class Macro {
 		}
 		
 		m.addCommand(new Roll(speed,heading,0));
+		r.sendCommand(m);
 	}
 }
