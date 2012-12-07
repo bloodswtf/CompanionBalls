@@ -5,7 +5,7 @@ import se.nicklasgavelin.sphero.Robot;
 import se.nicklasgavelin.sphero.command.SetDataStreamingCommand;
 import se.nicklasgavelin.sphero.command.SpinLeftCommand;
 import se.nicklasgavelin.sphero.command.SpinRightCommand;
-
+import se.nicklasgavelin.sphero.command.*;
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.*;
 
@@ -65,11 +65,21 @@ public class Macro {
 		m.addCommand(new Roll(speed, currentHeading, 0));
 		r.sendCommand(m);
 	}
+	public void spinLeftCommand()	{
+		r.sendCommand(new SpinLeftCommand(200));
+	}
+	
+	/**
+	 * Gets filtered data from the IMU sensor
+	 */
+	
 	//From forum.gosphero.com/archive/index.php/t-806.html
 	//TODO: change void return type
-	public void getDataFromGyro()	{
-		SetDataStreamingCommand sds = new SetDataStreamingCommand(210, 1, SetDataStreamingCommand.DATA_STREAMING_MASKS.GYRO.ALL.RAW, 100);
+	public void getDataFromSensors()	{
+		SetDataStreamingCommand sds = new SetDataStreamingCommand(210, 1, SetDataStreamingCommand.DATA_STREAMING_MASKS.ACCELEROMETER.ALL.FILTERED, 100);
 		r.sendCommand(sds);
+		r.sendCommand(new FrontLEDCommand(1));
+		r.sendCommand(new StabilizationCommand(false));
 	}
 void maze(String source){
 	System.out.println(source);
