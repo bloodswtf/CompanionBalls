@@ -14,6 +14,12 @@ public class Macro {
 	public Macro(Robot spheroRobot){
 		this.r = spheroRobot;
 	}
+	
+	public Macro(Robot spheroRobot, RobotSensorListener robotSensorListener){
+		this.r = spheroRobot;
+		r.addListener(robotSensorListener);
+	}
+	
 	public void rollfwd(){
 		MacroObject m = new MacroObject();
 		m.addCommand( new Roll(1,1,0) );
@@ -57,7 +63,7 @@ public class Macro {
 	}
 	public void rollRight()	{
 		MacroObject m = new MacroObject();
-		//currentHeading = (currentHeading+90)%360;
+//		currentHeading = (currentHeading+90)%360;
 		currentHeading = (currentHeading+30)%360;
 		m.addCommand(new Roll(speed, currentHeading, 0));
 		r.sendCommand(m);
@@ -73,7 +79,7 @@ public class Macro {
 	//From forum.gosphero.com/archive/index.php/t-806.html
 	//TODO: change void return type
 	public void getDataFromSensors()	{
-		SetDataStreamingCommand sds = new SetDataStreamingCommand(210, 1, SetDataStreamingCommand.DATA_STREAMING_MASKS.ACCELEROMETER.ALL.FILTERED, 100);
+		SetDataStreamingCommand sds = new SetDataStreamingCommand(420, 1, SetDataStreamingCommand.DATA_STREAMING_MASKS.IMU.ALL.FILTERED, 100);
 		r.sendCommand(sds);
 		r.sendCommand(new FrontLEDCommand(1));
 		r.sendCommand(new StabilizationCommand(false));

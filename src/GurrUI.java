@@ -31,7 +31,7 @@ public class GurrUI extends JFrame {
 	//Settings
 	private ConnectThread ct;
 	// Dimensions
-	private static final int windowWIDTH = 625;
+	private static final int windowWIDTH = 700;
 	private static final int windowHEIGHT =200;
 
 	//String ButtonsMapping
@@ -266,7 +266,7 @@ public class GurrUI extends JFrame {
 	private class AddrobottoArrayButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
 			Iterator<Robot> i = ct.getRobotArray().iterator();
-			m = new Macro(i.next());
+			m = new Macro(i.next(), new RobotSensorListener());
 			System.out.println(m.r.getId() + " was added");
 		}
 	}
