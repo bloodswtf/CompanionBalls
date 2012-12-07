@@ -43,7 +43,7 @@ public class Macro {
 	}
 	public void rollForward()	{
 		MacroObject m = new MacroObject();
-		m.addCommand(new Roll(speed,currentHeading,0));
+		m.addCommand(new Roll(speed, heading,0));
 		r.sendCommand(m);
 	}
 	public void stop()	{
@@ -53,16 +53,16 @@ public class Macro {
 	}
 	public void rollLeft()	{
 		MacroObject m = new MacroObject();
-		currentHeading = (currentHeading+330)%360;
-//		currentHeading = (currentHeading+270)%360;
-		m.addCommand(new Roll(speed, currentHeading, 0));
+		heading = (heading+330)%360;
+//		heading = (heading+270)%360;
+		m.addCommand(new Roll(speed, heading, 0));
 		r.sendCommand(m);
 	}
 	public void rollRight()	{
 		MacroObject m = new MacroObject();
-		//currentHeading = (currentHeading+90)%360;
-		currentHeading = (currentHeading+30)%360;
-		m.addCommand(new Roll(speed, currentHeading, 0));
+		//heading = (heading+90)%360;
+		heading = (heading+30)%360;
+		m.addCommand(new Roll(speed, heading, 0));
 		r.sendCommand(m);
 	}
 	public void spinLeftCommand()	{

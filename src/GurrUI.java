@@ -1,6 +1,8 @@
 
 
 
+
+
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Container;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+
 
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.Delay;
@@ -106,8 +109,9 @@ public class GurrUI extends JFrame {
 	//Macros and stuff
 	private Macro m;
 
-	public GurrUI (){
-		this.ct=new ConnectThread();
+	public GurrUI (ConnectThread ct){
+		this.ct = ct;
+		//this.ct=new ConnectThread();
 		
 	}//constructor
 	
@@ -264,6 +268,7 @@ public class GurrUI extends JFrame {
 	}
 
 	private class AddrobottoArrayButtonHandler implements ActionListener {
+		
 		public void actionPerformed(ActionEvent e) {			
 			Iterator<Robot> i = ct.getRobotArray().iterator();
 			m = new Macro(i.next());
