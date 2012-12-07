@@ -1,4 +1,5 @@
 
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,7 @@ import javax.activation.CommandObject;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import experimental.sphero.macro.Rotate;
+
 import se.nicklasgavelin.bluetooth.Bluetooth;
 import se.nicklasgavelin.bluetooth.Bluetooth.EVENT;
 import se.nicklasgavelin.bluetooth.BluetoothDevice;
@@ -23,6 +24,7 @@ import se.nicklasgavelin.sphero.command.FrontLEDCommand;
 import se.nicklasgavelin.sphero.command.RollCommand;
 import se.nicklasgavelin.sphero.command.SpinLeftCommand;
 import se.nicklasgavelin.sphero.command.SpinRightCommand;
+import se.nicklasgavelin.sphero.command.StabilizationCommand;
 import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
 import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
 import se.nicklasgavelin.sphero.macro.MacroObject;
@@ -276,22 +278,24 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 		public void informationResponseReceived( Robot r, InformationResponseMessage response )
 		{
 			//From forum.gosphero.com/archive/index.php/t-806.html
+			//data[1] and data[3] are IMU data for x-value and y-value
 			dr = ( DataResponse ) response;
 			byte[] data = dr.getSensorData();
 			System.out.println(" ");
-			//for (int i = 0; i < data.length; i++) {
-				
-				System.out.print(data[1]+" ");
-				System.out.print(data[3]+" ");
-				System.out.print(data[5]+" ");
-				System.out.print("   Gyro: ");
-				System.out.print(data[2]+" ");
-				System.out.print(data[4]+" ");
-				System.out.print(data[6]);
-				
-				
-			//}
+//			System.out.print(data[1]+" ");
+//			System.out.print(data[3]+" ");
+//			System.out.print(data[5]+" ");
+//			System.out.print("   Gyro: ");
+//			System.out.print(data[2]+" ");
+//			System.out.print(data[4]+" ");
+//			System.out.print(data[6]);
 			
+			System.out.print(data[1]+" ");
+			System.out.print(data[2]+" ");
+			System.out.print(data[3]+" ");
+			System.out.print(data[4]+" ");
+			System.out.print(data[5]+" ");
+			System.out.print(data[6]);
 		}
 	}
 
