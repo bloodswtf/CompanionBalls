@@ -1,13 +1,10 @@
-import java.awt.Color;
 import java.io.IOException;
 
 import se.nicklasgavelin.sphero.Robot;
 import se.nicklasgavelin.sphero.command.CommandMessage;
-import se.nicklasgavelin.sphero.command.RGBLEDCommand;
 import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 import se.nicklasgavelin.sphero.response.ResponseMessage;
 import se.nicklasgavelin.sphero.response.information.DataResponse;
-import sun.awt.geom.AreaOp.AddOp;
 
 
 
