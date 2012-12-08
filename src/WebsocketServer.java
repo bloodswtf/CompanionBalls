@@ -1,5 +1,8 @@
 
 import java.net.*;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Scanner;
 import java.io.*;
 
 public class WebsocketServer extends Thread
@@ -61,4 +64,5 @@ public class WebsocketServer extends Thread
 		} catch (Exception e) {return false;}
 		return true;
 	}
+
 }

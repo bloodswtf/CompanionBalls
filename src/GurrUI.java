@@ -33,6 +33,7 @@ import se.nicklasgavelin.sphero.Robot;
 public class GurrUI extends JFrame {
 	//Settings
 	private ConnectThread ct;
+	private WebsocketServer ws;
 	// Dimensions
 	private static final int windowWIDTH = 700;
 	private static final int windowHEIGHT =200;
@@ -109,12 +110,16 @@ public class GurrUI extends JFrame {
 	//Macros and stuff
 	private Macro m;
 
-	public GurrUI (ConnectThread ct){
+	public GurrUI (ConnectThread ct, WebsocketServer ws){
+		this.ws=ws;
 		this.ct = ct;
 		//this.ct=new ConnectThread();
 		
 	}//constructor
-	
+	public GurrUI (ConnectThread ct){
+		this.ws=null;
+		this.ct = ct;
+	}
 	public void fixGUI(){
 		createbuttons();
 		
@@ -271,7 +276,7 @@ public class GurrUI extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {			
 			Iterator<Robot> i = ct.getRobotArray().iterator();
-			m = new Macro(i.next(), new RobotSensorListener());
+			m = new Macro(i.next(), new RobotSensorListener(ws));
 			System.out.println(m.r.getId() + " was added");
 		}
 	}
