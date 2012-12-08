@@ -35,9 +35,9 @@ public class DirectionCalculation {
 		speed = pitch *1.6;
 		
 		if (roll > speed){
-			speed=roll/200f;
+			speed=roll/100f;
 		}else{
-			speed=speed/200f;
+			speed=speed/100f;
 		}
 		
 		

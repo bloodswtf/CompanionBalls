@@ -16,7 +16,7 @@ public class WebsocketClient
 
 			while(true){
 				if (in.available()>0){
-					System.out.println("Simon says my degree should be " + in.readInt());
+					System.out.println("Simon says my heading should be " + in.readInt());
 					System.out.println("Simon says my speed should be " + in.readDouble());
 				}
 			}
