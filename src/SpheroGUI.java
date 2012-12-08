@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 import se.nicklasgavelin.sphero.Robot;
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.Delay;
@@ -138,7 +139,7 @@ public class SpheroGUI extends JFrame implements ActionListener
 					ct.stopThread();
 
 				// Create a new thread
-				ct = new ConnectThread();
+				ct = new ConnectThread("");
 				ct.start();
 
 				// Toggle our button

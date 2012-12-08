@@ -1,4 +1,5 @@
 
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,7 @@ import javax.activation.CommandObject;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import experimental.sphero.macro.Rotate;
+
 import se.nicklasgavelin.bluetooth.Bluetooth;
 import se.nicklasgavelin.bluetooth.Bluetooth.EVENT;
 import se.nicklasgavelin.bluetooth.BluetoothDevice;
@@ -23,6 +24,7 @@ import se.nicklasgavelin.sphero.command.FrontLEDCommand;
 import se.nicklasgavelin.sphero.command.RollCommand;
 import se.nicklasgavelin.sphero.command.SpinLeftCommand;
 import se.nicklasgavelin.sphero.command.SpinRightCommand;
+import se.nicklasgavelin.sphero.command.StabilizationCommand;
 import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
 import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
 import se.nicklasgavelin.sphero.macro.MacroObject;
@@ -43,12 +45,14 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 		private int responses = 0;
 		Robot r;
 		private Bluetooth bt;
+		String bluetoothAddress;
 		private boolean stop = false;
 		public ArrayList<Robot> robots;
 		
-		public ConnectThread()
+		public ConnectThread(String bluetoothAddress)
 		{
 			this.robots = new ArrayList<Robot>();
+			this.bluetoothAddress = bluetoothAddress;
 		}
 		
 		public Collection<Robot> getRobotArray()	{
@@ -79,32 +83,35 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 				// Will perform a bluetooth discovery before connecting to
 				// any devices
 				bt = new Bluetooth( this, Bluetooth.SERIAL_COM );
-				bt.discover(); // # COMMENT THIS IF UNCOMMENTING THE BELOW AREA #
+//				bt.discover(); // # COMMENT THIS IF UNCOMMENTING THE BELOW AREA #
 				// Uncomment the code below and comment out the bt.discover() line above
 				// to
 				// connect directly to a given Sphero
 
 				// // ## START UNCOMMENT ##
-//				 final String bluetoothAddress = "0006664438B8";
-//				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
-//				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
-//				
-//				 // Create the robot from the bluetooth device
-//				 r = new Robot( btd );
-//				
-//				 // Try to connect to the robot
-//				 if ( r.connect() )
-//				 {
-//				 // Add ourselves as listeners
-//				 r.addListener( this );
-//				
-//				 // Send a rgb transition command macro
-//				 r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
-//				
-//				 // Send a direct command
-//				 r.sendCommand( new FrontLEDCommand( 1F ) );
-//				 }
-				// // ## END UNCOMMENT ##
+				// String bluetoothAddress = "000666440DB8";
+				
+				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
+				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
+				
+				 // Create the robot from the bluetooth device
+				 r = new Robot( btd );
+				
+				 // Try to connect to the robot
+				 if ( r.connect() )
+				 {
+					 // Add ourselves as listeners
+					 r.addListener( this );
+					
+					 // Send a rgb transition command macro
+					 r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
+					
+					 // Send a direct command
+					 r.sendCommand( new FrontLEDCommand( 1F ) );
+					 
+					 robots.add(r);
+				 }
+				 // ## END UNCOMMENT ##
 				
 				 /*
 				  * 
@@ -275,23 +282,6 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 		@Override
 		public void informationResponseReceived( Robot r, InformationResponseMessage response )
 		{
-			//From forum.gosphero.com/archive/index.php/t-806.html
-			dr = ( DataResponse ) response;
-			byte[] data = dr.getSensorData();
-			System.out.println(" ");
-			//for (int i = 0; i < data.length; i++) {
-				
-				System.out.print(data[1]+" ");
-				System.out.print(data[3]+" ");
-				System.out.print(data[5]+" ");
-				System.out.print("   Gyro: ");
-				System.out.print(data[2]+" ");
-				System.out.print(data[4]+" ");
-				System.out.print(data[6]);
-				
-				
-			//}
-			
 		}
 	}
 
