@@ -6,8 +6,6 @@ The things written in this file (excluding this disclaimer) and most
 of the documentation and codes are written by him.
 //Gurr3
 
-nu ska här fixas saker som en boss
-
 # Development Quick Start Guide
 
 ## Overview
