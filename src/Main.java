@@ -37,9 +37,9 @@ public class Main {
 		
 		
 		//CONFIGS
-		int ApplicationType = server;
+		int ApplicationType = client;
 		int port = 8080;
-		String socketname = "sötsocket" ;
+		String socketname = "130.240.95.209" ;
 		
 		
 		
