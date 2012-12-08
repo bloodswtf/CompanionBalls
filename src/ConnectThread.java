@@ -45,12 +45,14 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 		private int responses = 0;
 		Robot r;
 		private Bluetooth bt;
+		String bluetoothAddress;
 		private boolean stop = false;
 		public ArrayList<Robot> robots;
 		
-		public ConnectThread()
+		public ConnectThread(String bluetoothAddress)
 		{
 			this.robots = new ArrayList<Robot>();
+			this.bluetoothAddress = bluetoothAddress;
 		}
 		
 		public Collection<Robot> getRobotArray()	{
@@ -87,7 +89,7 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 				// connect directly to a given Sphero
 
 				// // ## START UNCOMMENT ##
-				 final String bluetoothAddress = "000666440DB8";
+				// String bluetoothAddress = "000666440DB8";
 				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
 				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
 				
