@@ -26,6 +26,7 @@ import javax.swing.KeyStroke;
 
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.Delay;
+import se.nicklasgavelin.sphero.macro.command.FrontLED;
 import se.nicklasgavelin.sphero.macro.command.RGBSD2;
 import se.nicklasgavelin.sphero.macro.command.Roll;
 import se.nicklasgavelin.sphero.Robot;
@@ -298,10 +299,12 @@ public class GurrUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {			
 			ClientServerCreate sc = new ClientServerCreate(iptoserver, 1, 8080);
 			wc=sc.wc;
+			m.turnOnFrontLed();
 			while (true){
 				try {
 					if (wc.in.available()>0){
 						m.remoteDrive(wc.in.readInt(), wc.in.readDouble());
+//						System.out.println(wc.in.readInt() + wc.in.readDouble());
 					}
 				} catch (IOException e1) {				}
 			}

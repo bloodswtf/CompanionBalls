@@ -87,7 +87,7 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 				// connect directly to a given Sphero
 
 				// // ## START UNCOMMENT ##
-				 final String bluetoothAddress = "000666440DB8";
+				 final String bluetoothAddress = "0006664438B8";
 				 BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
 				 bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
 				

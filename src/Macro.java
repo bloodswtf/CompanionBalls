@@ -82,6 +82,10 @@ public class Macro {
 		r.sendCommand(new SpinLeftCommand(200));
 	}
 	
+	public void turnOnFrontLed()	{
+		r.sendCommand(new FrontLEDCommand(1));
+	}
+	
 	/**
 	 * Gets filtered data from the IMU sensor
 	 */

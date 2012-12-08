@@ -14,12 +14,12 @@ public class WebsocketClient
 			InputStream inFromServer = client.getInputStream();
 			in = new DataInputStream(inFromServer);
 
-			while(true){
-				if (in.available()>0){
-					System.out.println("Simon says my heading should be " + in.readInt());
-					System.out.println("Simon says my speed should be " + in.readDouble());
-				}
-			}
+//			while(true){
+//				if (in.available()>0){
+//					System.out.println("Simon says my heading should be " + in.readInt());
+//					System.out.println("Simon says my speed should be " + in.readDouble());
+//				}
+//			}
 			//client.close();
 		}catch(IOException e){e.printStackTrace();}
 	}
