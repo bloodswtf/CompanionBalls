@@ -139,7 +139,7 @@ public class SpheroGUI extends JFrame implements ActionListener
 					ct.stopThread();
 
 				// Create a new thread
-				ct = new ConnectThread();
+				ct = new ConnectThread("");
 				ct.start();
 
 				// Toggle our button

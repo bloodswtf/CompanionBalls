@@ -10,6 +10,7 @@ import java.awt.Dimension;
 //import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -25,6 +26,7 @@ import javax.swing.KeyStroke;
 
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.Delay;
+import se.nicklasgavelin.sphero.macro.command.FrontLED;
 import se.nicklasgavelin.sphero.macro.command.RGBSD2;
 import se.nicklasgavelin.sphero.macro.command.Roll;
 import se.nicklasgavelin.sphero.Robot;
@@ -33,8 +35,11 @@ import se.nicklasgavelin.sphero.Robot;
 public class GurrUI extends JFrame {
 	//Settings
 	private ConnectThread ct;
+	private WebsocketServer ws=null;
+	private WebsocketClient wc=null;
+	private String iptoserver;
 	// Dimensions
-	private static final int windowWIDTH = 625;
+	private static final int windowWIDTH = 700;
 	private static final int windowHEIGHT =200;
 
 	//String ButtonsMapping
@@ -48,15 +53,15 @@ public class GurrUI extends JFrame {
 	private static String ChangeColorMAP = 	"W";
 	private static String ConnectMAP =    	"1";
 	private static String DisconnectMAP = 	"2";
-	
+
 	//unbinded - do as above
 	private static String AddrobottoArrayMAP = 	"";
 	private static String B2MAP = 	"";
 	private static String B3MAP = 	"";
 	private static String B4MAP = 	"";
-	
 
-	
+
+
 	// strings
 	private static String headerstring = "The ball coordinator";
 	// strings buttons, please dont mess around with spacing
@@ -67,7 +72,7 @@ public class GurrUI extends JFrame {
 
 	private static String Stop = "           Stop           ";
 	private static String Panic ="         PANIC!!        ";
-							
+
 	private static String Spin =        "                 Spin";
 	private static String ChangeColor = "Change Color";
 
@@ -76,8 +81,8 @@ public class GurrUI extends JFrame {
 
 	private static String AddrobottoArray = "Add Robots To Array";
 	private static String B2 = "Get some kind of response";
-	private static String B3 = "B3";
-	private static String B4 = "B4";
+	private static String B3 = "THIS IS SERVER";
+	private static String B4 = "ohh, and I am client";
 	//end configs
 
 	// the buttons
@@ -105,19 +110,18 @@ public class GurrUI extends JFrame {
 	private B2ButtonHandler B2bHandler;
 	private B3ButtonHandler B3bHandler;
 	private B4ButtonHandler B4bHandler;
-	
+
 	//Macros and stuff
 	private Macro m;
 
-	public GurrUI (ConnectThread ct){
+
+	public GurrUI (ConnectThread ct, String nameonserver){
+		iptoserver = nameonserver;
 		this.ct = ct;
-		//this.ct=new ConnectThread();
-		
-	}//constructor
-	
+	}
 	public void fixGUI(){
 		createbuttons();
-		
+
 		JPanel panel = new JPanel();
 		JPanel left = new JPanel();
 		JPanel middle = new JPanel();
@@ -126,14 +130,14 @@ public class GurrUI extends JFrame {
 
 		panel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		 
+
 		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
 		middle.setLayout(new BoxLayout(middle, BoxLayout.Y_AXIS));
 		right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
 		middlehorizontal.setLayout(new BoxLayout(middlehorizontal, BoxLayout.X_AXIS));
-		
+
 		middle.add(Box.createRigidArea(new Dimension(300,0)));
-		
+
 		addbuttonsConnectDisconnect(left);
 		addbuttonsforward(middle);
 		addbuttonsDirections(middlehorizontal);
@@ -141,7 +145,7 @@ public class GurrUI extends JFrame {
 		addbuttonsStopPanic(middle);
 		addbuttonsSpinColor(right);
 		addbuttonsB14(right);
-		
+
 		//Add listeners to keyboard
 		addbuttonslistener(ForwardB, ForwardMAP);
 		addbuttonslistener(LeftB, LeftMAP);
@@ -157,13 +161,13 @@ public class GurrUI extends JFrame {
 		addbuttonslistener(B2B, B2MAP);
 		addbuttonslistener(B3B, B3MAP);
 		addbuttonslistener(B4B, B4MAP);
-		
-		
+
+
 		panel.add(left);
 		panel.add(middle);
 		panel.add(right);
 		add(panel);
-			
+
 		setTitle(headerstring);
 		setSize(windowWIDTH , windowHEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -176,8 +180,8 @@ public class GurrUI extends JFrame {
 	// or SpheroGUI should become something that's callable, 
 	//this class can probably take it as an argument from the main class
 	//and call something like ct.rollforward when forwardbutton is pressed
-	
-	
+
+
 	//------------------------------------------------------buttons part 1
 	private class ForwardButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
@@ -208,10 +212,10 @@ public class GurrUI extends JFrame {
 	}
 	private class PanicButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {	
-//			m.rollfwd();
-			
+			//			m.rollfwd();
+
 			m.spinLeftCommand();
-			
+
 			/*try {
 				int currentheading=0;
 				Robot r = new Robot();
@@ -224,12 +228,12 @@ public class GurrUI extends JFrame {
 					ct.r.sendCommand(m);
 					currentheading=currentheading+20;
 				}
-				
+
 				System.out.println("while done");
-				
-				
-				
-				
+
+
+
+
 			} catch (AWTException t) {
 				// TODO Auto-generated catch block
 				t.printStackTrace();
@@ -268,10 +272,10 @@ public class GurrUI extends JFrame {
 	}
 
 	private class AddrobottoArrayButtonHandler implements ActionListener {
-		
+
 		public void actionPerformed(ActionEvent e) {			
 			Iterator<Robot> i = ct.getRobotArray().iterator();
-			m = new Macro(i.next());
+			m = new Macro(i.next(), new RobotSensorListener(ws));
 			System.out.println(m.r.getId() + " was added");
 		}
 	}
@@ -282,36 +286,48 @@ public class GurrUI extends JFrame {
 			m.getDataFromSensors();
 		}
 	}
-	
+
 	private class B3ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-		
+			ClientServerCreate sc = new ClientServerCreate("leavethisempty", 0, 8080);
+			ws=sc.ws;
+
 		}
 	}
-	
+
 	private class B4ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
-		
+			ClientServerCreate sc = new ClientServerCreate(iptoserver, 1, 8080);
+			wc=sc.wc;
+			m.turnOnFrontLed();
+			while (true){
+				try {
+					if (wc.in.available()>0){
+						m.remoteDrive(wc.in.readInt(), wc.in.readDouble());
+//						System.out.println(wc.in.readInt() + wc.in.readDouble());
+					}
+				} catch (IOException e1) {				}
+			}
 		}
 	}
-	
-	
+
+
 	//SUGGESTION: do not look beneath this---------------------------------------
 
-	
-	
-	
-	
+
+
+
+
 
 	//creating the buttons
 	private void createbuttons(){
 		// handlers for each button and ActionListeners to each button.
-		
+
 		ForwardB = new JButton(Forward);
 		ForwardbHandler = new ForwardButtonHandler();
 		ForwardB.addActionListener(ForwardbHandler);
 		ForwardB.setAlignmentX(CENTER_ALIGNMENT);
-		
+
 		BackwardB = new JButton(Backward);
 		BackwardbHandler = new BackwardButtonHandler();
 		BackwardB.addActionListener(BackwardbHandler);
@@ -321,12 +337,12 @@ public class GurrUI extends JFrame {
 		RightbHandler = new RightButtonHandler();
 		RightB.addActionListener(RightbHandler);
 		RightB.setAlignmentX(CENTER_ALIGNMENT);
-		
+
 		LeftB = new JButton(Left);
 		LeftbHandler = new LeftButtonHandler();
 		LeftB.addActionListener(LeftbHandler);
 		LeftB.setAlignmentX(CENTER_ALIGNMENT);
-		
+
 		RightB = new JButton(Right);
 		RightbHandler = new RightButtonHandler();
 		RightB.addActionListener(RightbHandler);
@@ -361,28 +377,28 @@ public class GurrUI extends JFrame {
 		Disconnectbhandler = new DisconnectButtonHandler();
 		DisconnectB.addActionListener(Disconnectbhandler);
 		DisconnectB.setAlignmentX(LEFT_ALIGNMENT);
-		
+
 		AddrobottoArrayB = new JButton(AddrobottoArray);
 		AddrobottoArraybHandler= new AddrobottoArrayButtonHandler();
 		AddrobottoArrayB.addActionListener(AddrobottoArraybHandler);
 		AddrobottoArrayB.setAlignmentX(LEFT_ALIGNMENT);
-		
+
 		B2B = new JButton(B2);
 		B2bHandler= new B2ButtonHandler();
 		B2B.addActionListener(B2bHandler);
 		B2B.setAlignmentX(RIGHT_ALIGNMENT);
-		
+
 		B3B = new JButton(B3);
 		B3bHandler= new B3ButtonHandler();
 		B3B.addActionListener(B3bHandler);
-		B3B.setAlignmentX(RIGHT_ALIGNMENT);
-		
+		B3B.setAlignmentX(LEFT_ALIGNMENT);
+
 		B4B = new JButton(B4);
 		B4bHandler= new B4ButtonHandler();
 		B4B.addActionListener(B4bHandler);
 		B4B.setAlignmentX(RIGHT_ALIGNMENT);
 	}
-	
+
 	//THESE CONTAIN THE SPACING BETWEEN THE BUTTONS, PLEASE DONT MESS AROUND WITH IT
 	private void addbuttonsforward(Container C){
 		C.add(ForwardB);
@@ -406,25 +422,26 @@ public class GurrUI extends JFrame {
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(ChangeColorB);
 	}
-	
+
 	private void addbuttonsConnectDisconnect(Container C){
 		C.add(ConnectB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(B3B);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(AddrobottoArrayB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(DisconnectB);
 	}
-	
+
 	private void addbuttonsB14(Container C){
-		
+
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(B2B);
-		C.add(Box.createRigidArea(new Dimension(0, 5)));
-		C.add(B3B);
+		
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(B4B);
 	}
-	
+
 	private void addbuttonslistener(JButton B, String key){
 		B.getInputMap(B.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key),"pressed");
 		B.getInputMap(B.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released "+ key), "released");

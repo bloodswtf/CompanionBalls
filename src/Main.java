@@ -20,46 +20,16 @@ public class Main {
 		//		ct.start();
 		//		while(ct.getRobotArray().size()==0){}
 		
+		String bluetoothAddress = "000666440DB8"; //NEW , WBG
+		//String bluetoothAddress = "0006664438B8"; //OLD, BBR
+		String ConnectToIP = "130.240.95.209";
 		
-		GurrUI gurrui = new GurrUI(new ConnectThread());
+		GurrUI gurrui = new GurrUI(new ConnectThread(bluetoothAddress), ConnectToIP);
 		gurrui.fixGUI();
 		
 		
-		
-		
 		//backgroundvariables, do not touch
-		//server sends commands - clients recieves and does them
-		int server = 0;
-		int client = 1;
-		WebsocketClient	wc;
-		Thread ws;
-		
-		
-		
-		//CONFIGS
-		int ApplicationType = server;
-		int port = 8080;
-		String socketname = "sötsocket" ;
-		
-		
-		
-
-		if (ApplicationType==server)
-			try 
-			{
-				ws = new WebsocketServer(port);
-				ws.start();
-			} catch (IOException e) {e.printStackTrace();}
-
-		else if (ApplicationType==client)
-			wc = new WebsocketClient(port, socketname);
-		
-		else 
-			System.out.println("Warning: Single Player only");
-		//SpheroGUI commander = new SpheroGUI();
-		
-
+		//server sends commands - clients recieves and does them	
 	}
-
 }
 
