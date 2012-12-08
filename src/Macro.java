@@ -23,6 +23,12 @@ public class Macro {
 		r.addListener(robotSensorListener);
 	}
 	
+	public void remoteDrive(int heading, double speed){
+		MacroObject m = new MacroObject();
+		m.addCommand( new Roll(speed,heading,0) );
+		r.sendCommand(m);
+	}
+	
 	public void rollfwd(){
 		MacroObject m = new MacroObject();
 		m.addCommand( new Roll(1,1,0) );

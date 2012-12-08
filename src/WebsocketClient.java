@@ -3,7 +3,7 @@ import java.io.*;
 
 public class WebsocketClient
 {
-
+	public DataInputStream in;
 	public WebsocketClient(int port , String serverName){
 		try
 		{
@@ -12,7 +12,7 @@ public class WebsocketClient
 			System.out.println("Just connected to " + client.getRemoteSocketAddress());
 
 			InputStream inFromServer = client.getInputStream();
-			DataInputStream in = new DataInputStream(inFromServer);
+			in = new DataInputStream(inFromServer);
 
 			while(true){
 				if (in.available()>0){
@@ -23,4 +23,7 @@ public class WebsocketClient
 			//client.close();
 		}catch(IOException e){e.printStackTrace();}
 	}
+	
+		
+	
 }

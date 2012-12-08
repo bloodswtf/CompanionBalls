@@ -21,53 +21,13 @@ public class Main {
 		//		while(ct.getRobotArray().size()==0){}
 		
 		
+		String ConnectToIP = "130.240.95.209";
+		GurrUI gurrui = new GurrUI(new ConnectThread(), ConnectToIP);
+		gurrui.fixGUI();
+		
+		
 		//backgroundvariables, do not touch
-		//server sends commands - clients recieves and does them
-		int server = 0;
-		int client = 1;
-		WebsocketClient	wc;
-		WebsocketServer ws;
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		//CONFIGS
-		int ApplicationType = client;
-		int port = 8080;
-		String socketname = "130.240.95.209" ;
-		
-		
-		
-
-		if (ApplicationType==server)
-			try 
-			{
-				ws = new WebsocketServer(port);
-				ws.start();
-				GurrUI gurrui = new GurrUI(new ConnectThread(), ws);
-				gurrui.fixGUI();
-			} catch (IOException e) {e.printStackTrace();}
-
-		else if (ApplicationType==client){
-			wc = new WebsocketClient(port, socketname);
-		GurrUI gurrui = new GurrUI(new ConnectThread());
-		gurrui.fixGUI();
-		}
-		else {
-			System.out.println("Warning: Single Player only");
-		//SpheroGUI commander = new SpheroGUI();
-		
-		GurrUI gurrui = new GurrUI(new ConnectThread());
-		gurrui.fixGUI();
-		}
-		
+		//server sends commands - clients recieves and does them	
 	}
-
 }
 
