@@ -1,4 +1,5 @@
 
+
 import java.io.IOException;
 import java.sql.ClientInfoStatus;
 import java.util.Iterator;
@@ -20,8 +21,14 @@ public class Main {
 		//		ct.start();
 		//		while(ct.getRobotArray().size()==0){}
 		
+		
+		//Boll1 "000666440DB8"
 		String bluetoothAddress = "000666440DB8";
-		String ConnectToIP = "130.240.95.209";
+		
+		
+		//BloodsIP = "130.240.95.209"
+		//Gurr "130.240.111.34"
+		String ConnectToIP = "130.240.111.34";
 		GurrUI gurrui = new GurrUI(new ConnectThread(bluetoothAddress), ConnectToIP);
 		gurrui.fixGUI();
 		
