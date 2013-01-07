@@ -1,11 +1,13 @@
+package companionBalls.robotContainerParts.networking;
+
 import java.io.IOException;
 
 
-public class ClientServerCreate {
+public class ClientAndServerCreator{
 	WebsocketClient	wc;
 	WebsocketServer ws;
-	
-	ClientServerCreate(String servername, int ApplicationType, int port){
+
+	public void ClientServerCreate(String servername, int ApplicationType, int port){
 		int servertype = 0;
 		int clienttype = 1;
 

@@ -1,18 +1,7 @@
 package companionBalls.robotContainerParts;
 
-
-
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.activation.CommandObject;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 
 import se.nicklasgavelin.bluetooth.Bluetooth;
 import se.nicklasgavelin.bluetooth.Bluetooth.EVENT;
@@ -20,22 +9,15 @@ import se.nicklasgavelin.bluetooth.BluetoothDevice;
 import se.nicklasgavelin.bluetooth.BluetoothDiscoveryListener;
 import se.nicklasgavelin.sphero.Robot;
 import se.nicklasgavelin.sphero.RobotListener;
-import se.nicklasgavelin.sphero.command.AbortMacroCommand;
 import se.nicklasgavelin.sphero.command.CommandMessage;
 import se.nicklasgavelin.sphero.command.FrontLEDCommand;
-import se.nicklasgavelin.sphero.command.RollCommand;
-import se.nicklasgavelin.sphero.command.SpinLeftCommand;
-import se.nicklasgavelin.sphero.command.SpinRightCommand;
-import se.nicklasgavelin.sphero.command.StabilizationCommand;
 import se.nicklasgavelin.sphero.exception.InvalidRobotAddressException;
 import se.nicklasgavelin.sphero.exception.RobotBluetoothException;
-import se.nicklasgavelin.sphero.macro.MacroObject;
-import se.nicklasgavelin.sphero.macro.command.*;
 import se.nicklasgavelin.sphero.response.ResponseMessage;
 import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 import se.nicklasgavelin.sphero.response.information.DataResponse;
 
-/**
+/** 
  * Derived from the ConnectThread example from Nicklas Gavelin
  * 
  */

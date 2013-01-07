@@ -36,12 +36,9 @@ public class RobotController {
 		r.sendCommand(m);
 	}
 
-	public void rollfwd(){
-		MacroObject m = new MacroObject();
-		m.addCommand( new Roll(1,1,0) );
-		r.sendCommand(m);
-
-	}
+	/**
+	 * Starts a circular movement
+	 */
 	public void rollcircle(){
 		int degree=0;
 		MacroObject m = new MacroObject();
@@ -74,16 +71,13 @@ public class RobotController {
 	public void rollLeft()	{
 		MacroObject m = new MacroObject();
 		heading = (heading+330)%360;
-		//		heading = (heading+270)%360;
 		m.addCommand(new Roll(speed, heading, 0));
 		r.sendCommand(m);
 	}
 	public void rollRight()	{
 		MacroObject m = new MacroObject();
-		//heading = (heading+90)%360;
 		heading = (heading+30)%360;
 		m.addCommand(new Roll(speed, heading, 0));
-
 		r.sendCommand(m);
 	}
 	public void spinLeftCommand()	{
@@ -94,10 +88,6 @@ public class RobotController {
 		r.sendCommand(new FrontLEDCommand(1));
 	}
 
-	/**
-	 * Gets filtered data from the IMU sensor
-	 */
-
 	//From forum.gosphero.com/archive/index.php/t-806.html
 	//TODO: change void return type
 	public void getDataFromSensors()	{
@@ -106,28 +96,29 @@ public class RobotController {
 		r.sendCommand(new FrontLEDCommand(1));
 		r.sendCommand(new StabilizationCommand(false));
 	}
-	public void maze(String source){
+
+	public void maze(String source) {
 		System.out.println(source);
 		MacroObject m = new MacroObject();
 
-		if (source.equals("forward")){
-			speed=speed+0.02;
+		if (source.equals("forward")) {
+			speed = speed + 0.02;
 
-		} else if (source.equals("backward")){
-			speed=speed-0.02;
-		} else if (source.equals("left")){
-			heading = heading +270;
-			//m.addCommand(new SpinRightCommand(90));
+		} else if (source.equals("backward")) {
+			speed = speed - 0.02;
+		} else if (source.equals("left")) {
+			heading = heading + 270;
+			// m.addCommand(new SpinRightCommand(90));
 			m.addCommand(new Delay(10));
-		} else if (source.equals("right")){
-			heading = heading +90;
+		} else if (source.equals("right")) {
+			heading = heading + 90;
 		}
 		heading = heading % 360;
-		if (speed <0){
+		if (speed < 0) {
 			speed = 0;
 		}
 
-		m.addCommand(new Roll(speed,heading,0));
+		m.addCommand(new Roll(speed, heading, 0));
 		r.sendCommand(m);
 	}
 }

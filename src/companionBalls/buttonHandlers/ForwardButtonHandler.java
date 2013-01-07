@@ -1,4 +1,4 @@
-package companionBalls.buttonActinos;
+package companionBalls.buttonHandlers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

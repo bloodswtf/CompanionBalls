@@ -20,22 +20,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import GurrUI.AddrobottoArrayButtonHandler;
-import GurrUI.B2ButtonHandler;
-import GurrUI.B3ButtonHandler;
-import GurrUI.B4ButtonHandler;
-import GurrUI.BackwardButtonHandler;
-import GurrUI.ChangeColorButtonHandler;
-import GurrUI.ConnectButtonHandler;
-import GurrUI.DisconnectButtonHandler;
-import GurrUI.ForwardButtonHandler;
-import GurrUI.LeftButtonHandler;
-import GurrUI.PanicButtonHandler;
-import GurrUI.RightButtonHandler;
-import GurrUI.SpinButtonHandler;
-import GurrUI.StopButtonHandler;
-
-
 import se.nicklasgavelin.sphero.macro.MacroObject;
 import se.nicklasgavelin.sphero.macro.command.Delay;
 import se.nicklasgavelin.sphero.macro.command.FrontLED;
@@ -43,14 +27,13 @@ import se.nicklasgavelin.sphero.macro.command.RGBSD2;
 import se.nicklasgavelin.sphero.macro.command.Roll;
 import se.nicklasgavelin.sphero.Robot;
 
-import companionBalls.buttonActinos.*;
+import companionBalls.buttonHandlers.*;
 import companionBalls.robotContainerParts.RobotController;
 
 
 public class JavaGui extends JFrame {
-	private String iptoserver;
 	// Dimensions
-	private static final int windowWIDTH = 700;
+	private static final int windowWIDTH = 760;
 	private static final int windowHEIGHT =200;
 
 	//String ButtonsMapping
@@ -70,8 +53,6 @@ public class JavaGui extends JFrame {
 	private static String B2MAP = 	"";
 	private static String B3MAP = 	"";
 	private static String B4MAP = 	"";
-
-
 
 	// strings
 	private static String headerstring = "The ball coordinator";
@@ -104,31 +85,7 @@ public class JavaGui extends JFrame {
 	AddrobottoArrayB, B2B, B3B, B4B
 	;
 
-	//-buttons part 1
-	private ForwardButtonHandler ForwardbHandler;
-	private BackwardButtonHandler BackwardbHandler;
-	private RightButtonHandler RightbHandler;
-	private LeftButtonHandler LeftbHandler;
-	//-buttons part 2
-	private StopButtonHandler StopbHandler;
-//	private PanicButtonHandler PanicbHandler;
-	private SpinButtonHandler SpinbHandler;
-	private ChangeColorButtonHandler ChangeColorbHandler;
-	//-buttons part 3
-//	private ConnectButtonHandler ConnectbHandler;
-//	private DisconnectButtonHandler Disconnectbhandler;
-//	//buttons part 4
-//	private AddrobottoArrayButtonHandler AddrobottoArraybHandler;
-//	private B2ButtonHandler B2bHandler;
-//	private B3ButtonHandler B3bHandler;
-//	private B4ButtonHandler B4bHandler;
-
-	//TODO: make new constructor
-//	public GurrUI (ConnectThread ct, String nameonserver){
-//		iptoserver = nameonserver;
-//		this.ct = ct;
-//	}
-	public void fixGUI(){
+	public JavaGui(){
 		createbuttons();
 
 		JPanel panel = new JPanel();
@@ -183,165 +140,136 @@ public class JavaGui extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		panel.requestFocusInWindow();
-		
-		//creating the buttons
-		private void createbuttons(){
-			// handlers for each button and ActionListeners to each button.
-
-			ForwardB = new JButton(Forward);
-			ForwardB.setAlignmentX(CENTER_ALIGNMENT);
-
-			BackwardB = new JButton(Backward);
-			BackwardbHandler = new BackwardButtonHandler();
-			BackwardB.addActionListener(BackwardbHandler);
-			BackwardB.setAlignmentX(CENTER_ALIGNMENT);
-
-			RightB = new JButton(Forward);
-			RightbHandler = new RightButtonHandler();
-			RightB.addActionListener(RightbHandler);
-			RightB.setAlignmentX(CENTER_ALIGNMENT);
-
-			LeftB = new JButton(Left);
-			LeftbHandler = new LeftButtonHandler();
-			LeftB.addActionListener(LeftbHandler);
-			LeftB.setAlignmentX(CENTER_ALIGNMENT);
-
-			RightB = new JButton(Right);
-			RightbHandler = new RightButtonHandler();
-			RightB.addActionListener(RightbHandler);
-			RightB.setAlignmentX(CENTER_ALIGNMENT);
-
-			StopB = new JButton(Stop);
-			StopbHandler = new StopButtonHandler();
-			StopB.addActionListener(StopbHandler);
-			StopB.setAlignmentX(CENTER_ALIGNMENT);
-
-			PanicB = new JButton(Panic);
-			PanicbHandler = new PanicButtonHandler();
-			PanicB.addActionListener(PanicbHandler);
-			PanicB.setAlignmentX(CENTER_ALIGNMENT);
-
-			SpinB = new JButton(Spin);
-			SpinbHandler = new SpinButtonHandler();
-			SpinB.addActionListener(SpinbHandler);
-			SpinB.setAlignmentX(RIGHT_ALIGNMENT);
-
-			ChangeColorB = new JButton(ChangeColor);
-			ChangeColorbHandler = new ChangeColorButtonHandler();
-			ChangeColorB.addActionListener(ChangeColorbHandler);
-			ChangeColorB.setAlignmentX(RIGHT_ALIGNMENT);
-
-			ConnectB = new JButton(Connect);
-			ConnectbHandler = new ConnectButtonHandler();
-			ConnectB.addActionListener(ConnectbHandler);
-			ConnectB.setAlignmentX(LEFT_ALIGNMENT);
-
-			DisconnectB = new JButton(Disconnect);
-			Disconnectbhandler = new DisconnectButtonHandler();
-			DisconnectB.addActionListener(Disconnectbhandler);
-			DisconnectB.setAlignmentX(LEFT_ALIGNMENT);
-
-			AddrobottoArrayB = new JButton(AddrobottoArray);
-			AddrobottoArraybHandler= new AddrobottoArrayButtonHandler();
-			AddrobottoArrayB.addActionListener(AddrobottoArraybHandler);
-			AddrobottoArrayB.setAlignmentX(LEFT_ALIGNMENT);
-
-			B2B = new JButton(B2);
-			B2bHandler= new B2ButtonHandler();
-			B2B.addActionListener(B2bHandler);
-			B2B.setAlignmentX(RIGHT_ALIGNMENT);
-
-			B3B = new JButton(B3);
-			B3bHandler= new B3ButtonHandler();
-			B3B.addActionListener(B3bHandler);
-			B3B.setAlignmentX(LEFT_ALIGNMENT);
-
-			B4B = new JButton(B4);
-			B4bHandler= new B4ButtonHandler();
-			B4B.addActionListener(B4bHandler);
-			B4B.setAlignmentX(RIGHT_ALIGNMENT);
-		}
-		
-		//Adds the action listeners to the buttons
-		public void addForwardButtonHandler(ActionListener actionListener, RobotControllerButton robotControllerButton)	{
-			ForwardbHandler = new ForwardButtonHandler();
-			ForwardB.addActionListener(ForwardbHandler);
-		}
-		public void addBackwardButtonHandler(ActionListener actionListener, RobotController robotController)	{
-			
-		}
-		public void addLeftButtonHandler(ActionListener actionListener, RobotController robotController)	{
-			
-		}
-		public void addRightButtonHandler(ActionListener actionListener, RobotController robotController)	{
-			
-		}
-		public void addStopButtonHandler(ActionListener actionListener, RobotController robotController)	{
-			
-		}
-		public void addSpinButtonHandler(ActionListener actionListener, RobotController robotController)	{
-			
-		}
-		public void addChangeColorButtonHandler(ActionListener actionListener, RobotController robotController)	{
-			
-		}
-		public void addConnectButtonHandler(ActionListener actionListener)	{
-			
-		}
-		public void addDisconnectButtonHandler(ActionListener actionListener)	{
-			
-		}
-		public void addAddRobotsToArrayButtonHandler(ActionListener actionListener)		{
-			
-		}
-		
-		
-		//THESE CONTAIN THE SPACING BETWEEN THE BUTTONS, PLEASE DONT MESS AROUND WITH IT
-		private void addbuttonsforward(Container C){
-			C.add(ForwardB);
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-		}
-		private void addbuttonsDirections(Container C){
-			C.add(LeftB);
-			C.add(Box.createRigidArea(new Dimension(5, 0)));
-			C.add(BackwardB);
-			C.add(Box.createRigidArea(new Dimension(5, 0)));
-			C.add(RightB);	
-		}
-		private void addbuttonsStopPanic(Container C){
-			C.add(Box.createRigidArea(new Dimension(0, 20)));
-			C.add(PanicB);
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(StopB);		
-		}
-		private void addbuttonsSpinColor(Container C){
-			C.add(SpinB);
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(ChangeColorB);
-		}
-
-		private void addbuttonsConnectDisconnect(Container C){
-			C.add(ConnectB);
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(B3B);
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(AddrobottoArrayB);
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(DisconnectB);
-		}
-
-		private void addbuttonsB14(Container C){
-
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(B2B);
-			
-			C.add(Box.createRigidArea(new Dimension(0, 5)));
-			C.add(B4B);
-		}
-
-		private void addbuttonslistener(JButton B, String key){
-			B.getInputMap(B.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key),"pressed");
-			B.getInputMap(B.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released "+ key), "released");
-		}
 	}
+	//creating the buttons
+	private void createbuttons(){
+		// handlers for each button and ActionListeners to each button.
+
+		ForwardB = new JButton(Forward);
+		ForwardB.setAlignmentX(CENTER_ALIGNMENT);
+
+		BackwardB = new JButton(Backward);
+		BackwardB.setAlignmentX(CENTER_ALIGNMENT);
+
+		RightB = new JButton(Forward);
+		RightB.setAlignmentX(CENTER_ALIGNMENT);
+
+		LeftB = new JButton(Left);
+		LeftB.setAlignmentX(CENTER_ALIGNMENT);
+
+		RightB = new JButton(Right);
+		RightB.setAlignmentX(CENTER_ALIGNMENT);
+
+		StopB = new JButton(Stop);
+		StopB.setAlignmentX(CENTER_ALIGNMENT);
+
+		PanicB = new JButton(Panic);
+		PanicB.setAlignmentX(CENTER_ALIGNMENT);
+
+		SpinB = new JButton(Spin);
+		SpinB.setAlignmentX(RIGHT_ALIGNMENT);
+
+		ChangeColorB = new JButton(ChangeColor);
+		ChangeColorB.setAlignmentX(RIGHT_ALIGNMENT);
+
+		ConnectB = new JButton(Connect);
+		ConnectB.setAlignmentX(LEFT_ALIGNMENT);
+
+		DisconnectB = new JButton(Disconnect);
+		DisconnectB.setAlignmentX(LEFT_ALIGNMENT);
+
+		AddrobottoArrayB = new JButton(AddrobottoArray);
+		AddrobottoArrayB.setAlignmentX(LEFT_ALIGNMENT);
+
+		B2B = new JButton(B2);
+		B2B.setAlignmentX(RIGHT_ALIGNMENT);
+
+		B3B = new JButton(B3);
+		B3B.setAlignmentX(LEFT_ALIGNMENT);
+
+		B4B = new JButton(B4);
+		B4B.setAlignmentX(RIGHT_ALIGNMENT);
+	}
+
+	//Adds the action listeners to the buttons
+	public void addForwardButtonHandler(ActionListener actionListener)	{
+		ForwardB.addActionListener(actionListener);
+	}
+	public void addBackwardButtonHandler(ActionListener actionListener)	{
+		BackwardB.addActionListener(actionListener);
+	}
+	public void addLeftButtonHandler(ActionListener actionListener)	{
+		LeftB.addActionListener(actionListener);
+	}
+	public void addRightButtonHandler(ActionListener actionListener)	{
+		RightB.addActionListener(actionListener);
+	}
+	public void addStopButtonHandler(ActionListener actionListener)	{
+		StopB.addActionListener(actionListener);
+	}
+	public void addSpinButtonHandler(ActionListener actionListener)	{
+		SpinB.addActionListener(actionListener);
+	}
+	public void addChangeColorButtonHandler(ActionListener actionListener)	{
+		ChangeColorB.addActionListener(actionListener);
+	}
+	public void addConnectButtonHandler(ActionListener actionListener)	{
+		ConnectB.addActionListener(actionListener);
+	}
+	public void addDisconnectButtonHandler(ActionListener actionListener)	{
+		DisconnectB.addActionListener(actionListener);
+	}
+	public void addAddRobotsToArrayButtonHandler(ActionListener actionListener)		{
+		AddRobotsToListB.addActionListener(actionListener);
+	}
+
+
+	//THESE CONTAIN THE SPACING BETWEEN THE BUTTONS, PLEASE DONT MESS AROUND WITH IT
+	private void addbuttonsforward(Container C){
+		C.add(ForwardB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+	}
+	private void addbuttonsDirections(Container C){
+		C.add(LeftB);
+		C.add(Box.createRigidArea(new Dimension(5, 0)));
+		C.add(BackwardB);
+		C.add(Box.createRigidArea(new Dimension(5, 0)));
+		C.add(RightB);	
+	}
+	private void addbuttonsStopPanic(Container C){
+		C.add(Box.createRigidArea(new Dimension(0, 20)));
+		C.add(PanicB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(StopB);		
+	}
+	private void addbuttonsSpinColor(Container C){
+		C.add(SpinB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(ChangeColorB);
+	}
+
+	private void addbuttonsConnectDisconnect(Container C){
+		C.add(ConnectB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(B3B);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(AddrobottoArrayB);
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(DisconnectB);
+	}
+
+	private void addbuttonsB14(Container C){
+
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(B2B);
+
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(B4B);
+	}
+
+	private void addbuttonslistener(JButton B, String key){
+		B.getInputMap(B.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key),"pressed");
+		B.getInputMap(B.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("released "+ key), "released");
+	}
+}
 
