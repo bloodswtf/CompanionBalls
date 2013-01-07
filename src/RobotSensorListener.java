@@ -6,7 +6,12 @@ import se.nicklasgavelin.sphero.response.InformationResponseMessage;
 import se.nicklasgavelin.sphero.response.ResponseMessage;
 import se.nicklasgavelin.sphero.response.information.DataResponse;
 
-
+/**
+ * For testing the sensor listener
+ * 
+ * @author david
+ *
+ */
 
 public class RobotSensorListener implements se.nicklasgavelin.sphero.RobotListener {
 
