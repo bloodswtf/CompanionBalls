@@ -13,6 +13,8 @@ import companionBalls.buttonHandlers.ChangeColorButtonHandler;
 import companionBalls.buttonHandlers.ConnectButtonHandler;
 import companionBalls.buttonHandlers.ForwardButtonHandler;
 import companionBalls.buttonHandlers.LeftButtonHandler;
+import companionBalls.buttonHandlers.MakeClientButtonHandler;
+import companionBalls.buttonHandlers.MakeServerButtonHandler;
 import companionBalls.buttonHandlers.RightButtonHandler;
 import companionBalls.buttonHandlers.SpinButtonHandler;
 import companionBalls.buttonHandlers.StopButtonHandler;
@@ -46,6 +48,7 @@ public class Main {
 	
 	public static void main(String[] args)	{
 		JavaGui gui = new JavaGui();
+		String ipToServer = "";  //TODO: fill in the server ip
 		
 		RobotContainer robotContainer = new RobotContainer();
 		
@@ -59,6 +62,8 @@ public class Main {
 		gui.addStopButtonHandler(new StopButtonHandler(robotContainer.controller));
 		gui.addConnectButtonHandler(new ConnectButtonHandler(robotContainer));
 		gui.addAddRobotsToArrayButtonHandler(new AddRobotsToArrayButtonHandler(robotContainer));
+		gui.addClientButtonHandler(new MakeClientButtonHandler(robotContainer, ipToServer));
+		gui.addServerButtonHanlder(new MakeServerButtonHandler(robotContainer));
 	}
 }
 

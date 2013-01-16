@@ -222,6 +222,12 @@ public class JavaGui extends JFrame {
 	public void addAddRobotsToArrayButtonHandler(ActionListener actionListener)		{
 		AddRobotsToListB.addActionListener(actionListener);
 	}
+	public void addServerButtonHanlder(ActionListener actionListener)	{
+		ServerB.addActionListener(actionListener);
+	}
+	public void addClientButtonHandler(ActionListener actionListener)	{
+		ClientB.addActionListener(actionListener);
+	}
 
 
 	//THESE CONTAIN THE SPACING BETWEEN THE BUTTONS, PLEASE DONT MESS AROUND WITH IT

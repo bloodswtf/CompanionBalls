@@ -5,19 +5,17 @@ import java.awt.event.ActionListener;
 
 import companionBalls.RobotContainer;
 
-public class MakeClientButtonHandler implements ActionListener {
+public class MakeServerButtonHandler implements ActionListener {
 
 	RobotContainer rc;
-	String ipToServer;
 	
-	public MakeClientButtonHandler(RobotContainer robotContainer, String ipToServer)	{
+	public MakeServerButtonHandler(RobotContainer robotContainer)	{
 		this.rc = robotContainer;
-		this.ipToServer = ipToServer;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		rc.startClient(ipToServer);
+		rc.startServer();
 	}
 
 }

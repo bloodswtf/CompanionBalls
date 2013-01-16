@@ -1,13 +1,10 @@
 package companionBalls;
 
-import ClientServerCreate;
-
 import java.io.IOException;
 
 import companionBalls.robotContainerParts.*;
 import companionBalls.robotContainerParts.networking.ClientAndServerCreator;
 import companionBalls.robotContainerParts.networking.WebsocketClient;
-import companionBalls.robotContainerParts.networking.WebsocketServer;
 
 public class RobotContainer {
 
@@ -56,5 +53,6 @@ public class RobotContainer {
 	
 	public void startServer()	{
 		clientServerCreator = new ClientAndServerCreator("leavethisempty", 0, 8080);
+		controller.addSensonListener(new RobotSensorListener(clientServerCreator.getWebsocketServer()));
 	}
 }
