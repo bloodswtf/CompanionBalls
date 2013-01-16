@@ -1,11 +1,19 @@
 package companionBalls;
 
+import ClientServerCreate;
+
+import java.io.IOException;
+
 import companionBalls.robotContainerParts.*;
+import companionBalls.robotContainerParts.networking.ClientAndServerCreator;
+import companionBalls.robotContainerParts.networking.WebsocketClient;
+import companionBalls.robotContainerParts.networking.WebsocketServer;
 
 public class RobotContainer {
 
 	private RobotConnector connector;
 	public RobotController controller;
+	private ClientAndServerCreator clientServerCreator;
 	
 	/**
 	 * Starts a device search and if a Sphero is found then it's connected and stored in the RobotConnector
@@ -29,7 +37,24 @@ public class RobotContainer {
 	//TODO(For the far future): Remove this in the future and make the search and connect methods do this instead. 
 	//Need some thing that checks if all the threads started by Bluetooth discover has finnished
 	public void finilizeConnection()	{
-		connector.getRobotArray();
 		controller = new RobotController(connector.getRobotArray().get(0));
+	}
+	
+	public void startClient(String ipToServer)	{
+		clientServerCreator = new ClientAndServerCreator(ipToServer, 1, 8080);
+		controller.turnOnFrontLed();
+		WebsocketClient wc = clientServerCreator.getWebsocketClient();
+		while (true){
+			try {
+				if (wc.in.available()>0){
+					controller.remoteDrive(wc.in.readInt(), wc.in.readDouble());
+//					System.out.println(wc.in.readInt() + wc.in.readDouble());
+				}
+			} catch (IOException e1) {				}
+		}
+	}
+	
+	public void startServer()	{
+		clientServerCreator = new ClientAndServerCreator("leavethisempty", 0, 8080);
 	}
 }

@@ -291,7 +291,6 @@ public class GurrUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {			
 			ClientServerCreate sc = new ClientServerCreate("leavethisempty", 0, 8080);
 			ws=sc.ws;
-
 		}
 	}
 

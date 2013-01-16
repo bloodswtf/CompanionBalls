@@ -7,8 +7,10 @@ import java.util.Iterator;
 import se.nicklasgavelin.sphero.Robot;
 
 import companionBalls.*;
+import companionBalls.buttonHandlers.AddRobotsToArrayButtonHandler;
 import companionBalls.buttonHandlers.BackwardButtonHandler;
 import companionBalls.buttonHandlers.ChangeColorButtonHandler;
+import companionBalls.buttonHandlers.ConnectButtonHandler;
 import companionBalls.buttonHandlers.ForwardButtonHandler;
 import companionBalls.buttonHandlers.LeftButtonHandler;
 import companionBalls.buttonHandlers.RightButtonHandler;
@@ -46,9 +48,8 @@ public class Main {
 		JavaGui gui = new JavaGui();
 		
 		RobotContainer robotContainer = new RobotContainer();
-		robotContainer.searchAndConnectToSphero();
 		
-		//Adding the button listeners to the buttons1
+		//Adding the button listeners to the buttons
 		gui.addForwardButtonHandler(new ForwardButtonHandler(robotContainer.controller));
 		gui.addBackwardButtonHandler(new BackwardButtonHandler(robotContainer.controller));
 		gui.addLeftButtonHandler(new LeftButtonHandler(robotContainer.controller));
@@ -56,6 +57,8 @@ public class Main {
 		gui.addChangeColorButtonHandler(new ChangeColorButtonHandler(robotContainer.controller));
 		gui.addSpinButtonHandler(new SpinButtonHandler(robotContainer.controller));
 		gui.addStopButtonHandler(new StopButtonHandler(robotContainer.controller));
+		gui.addConnectButtonHandler(new ConnectButtonHandler(robotContainer));
+		gui.addAddRobotsToArrayButtonHandler(new AddRobotsToArrayButtonHandler(robotContainer));
 	}
 }
 

@@ -4,10 +4,10 @@ import java.io.IOException;
 
 
 public class ClientAndServerCreator{
-	WebsocketClient	wc;
-	WebsocketServer ws;
+	private WebsocketClient	wc;
+	private WebsocketServer ws;
 
-	public void ClientServerCreate(String servername, int ApplicationType, int port){
+	public ClientAndServerCreator(String servername, int ApplicationType, int port){
 		int servertype = 0;
 		int clienttype = 1;
 
@@ -26,5 +26,11 @@ public class ClientAndServerCreator{
 		} else {
 			System.out.println("Warning: invalid second argument");	
 		}
+	}
+	public WebsocketClient getWebsocketClient()	{
+		return wc;
+	}
+	public WebsocketServer getWebsocketServer()	{
+		return ws;
 	}
 }

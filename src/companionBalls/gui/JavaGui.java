@@ -74,15 +74,15 @@ public class JavaGui extends JFrame {
 	//TODO: change this button so it says "Finilize Connection"
 	private static String AddrobottoArray = "Add Robots To Array";
 	private static String B2 = "Get some kind of response";
-	private static String B3 = "THIS IS SERVER";
-	private static String B4 = "ohh, and I am client";
+	private static String Server = "THIS IS SERVER";
+	private static String Client = "ohh, and I am client";
 	//end configs
 
 	// the buttons
 	private JButton ForwardB, BackwardB, RightB, LeftB,
-	StopB, PanicB, SpinB, ChangeColorB,
+	StopB, SpinB, ChangeColorB,
 	ConnectB, AddRobotsToListB, DisconnectB,
-	AddrobottoArrayB, B2B, B3B, B4B
+	AddrobottoArrayB, B2B, ServerB, ClientB
 	;
 
 	public JavaGui(){
@@ -118,15 +118,15 @@ public class JavaGui extends JFrame {
 		addbuttonslistener(BackwardB, BackwardMAP);
 		addbuttonslistener(RightB, RightMAP);
 		addbuttonslistener(StopB, StopMAP);
-		addbuttonslistener(PanicB, PanicMAP);
+//		addbuttonslistener(PanicB, PanicMAP);
 		addbuttonslistener(SpinB, SpinMAP);
 		addbuttonslistener(ChangeColorB, ChangeColorMAP);
 		addbuttonslistener(ConnectB, ConnectMAP);
 		addbuttonslistener(DisconnectB, DisconnectMAP);
 		addbuttonslistener(AddrobottoArrayB, AddrobottoArrayMAP);
 		addbuttonslistener(B2B, B2MAP);
-		addbuttonslistener(B3B, B3MAP);
-		addbuttonslistener(B4B, B4MAP);
+		addbuttonslistener(ServerB, B3MAP);
+		addbuttonslistener(ClientB, B4MAP);
 
 
 		panel.add(left);
@@ -163,8 +163,8 @@ public class JavaGui extends JFrame {
 		StopB = new JButton(Stop);
 		StopB.setAlignmentX(CENTER_ALIGNMENT);
 
-		PanicB = new JButton(Panic);
-		PanicB.setAlignmentX(CENTER_ALIGNMENT);
+//		PanicB = new JButton(Panic);
+//		PanicB.setAlignmentX(CENTER_ALIGNMENT);
 
 		SpinB = new JButton(Spin);
 		SpinB.setAlignmentX(RIGHT_ALIGNMENT);
@@ -184,11 +184,11 @@ public class JavaGui extends JFrame {
 		B2B = new JButton(B2);
 		B2B.setAlignmentX(RIGHT_ALIGNMENT);
 
-		B3B = new JButton(B3);
-		B3B.setAlignmentX(LEFT_ALIGNMENT);
+		ServerB = new JButton(Server);
+		ServerB.setAlignmentX(LEFT_ALIGNMENT);
 
-		B4B = new JButton(B4);
-		B4B.setAlignmentX(RIGHT_ALIGNMENT);
+		ClientB = new JButton(Client);
+		ClientB.setAlignmentX(RIGHT_ALIGNMENT);
 	}
 
 	//Adds the action listeners to the buttons
@@ -238,7 +238,7 @@ public class JavaGui extends JFrame {
 	}
 	private void addbuttonsStopPanic(Container C){
 		C.add(Box.createRigidArea(new Dimension(0, 20)));
-		C.add(PanicB);
+//		C.add(PanicB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(StopB);		
 	}
@@ -251,7 +251,7 @@ public class JavaGui extends JFrame {
 	private void addbuttonsConnectDisconnect(Container C){
 		C.add(ConnectB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
-		C.add(B3B);
+		C.add(ServerB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(AddrobottoArrayB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -264,7 +264,7 @@ public class JavaGui extends JFrame {
 		C.add(B2B);
 
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
-		C.add(B4B);
+		C.add(ClientB);
 	}
 
 	private void addbuttonslistener(JButton B, String key){

@@ -16,7 +16,7 @@ import se.nicklasgavelin.sphero.macro.command.*;
  *
  */
 public class RobotController {
-	Robot r;
+	private Robot r;
 	private int heading=0;
 	private double speed= 0.1;
 	private double backwardSpeed = -0.1;
@@ -28,6 +28,10 @@ public class RobotController {
 	public RobotController(Robot spheroRobot, RobotListener robotSensorListener){
 		this.r = spheroRobot;
 		r.addListener(robotSensorListener);
+	}
+	
+	public void addSensonListener(RobotListener robotListener)	{
+		r.addListener(robotListener);
 	}
 
 	public void remoteDrive(int heading, double speed){
