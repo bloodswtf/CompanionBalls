@@ -8,7 +8,7 @@ import companionBalls.robotContainerParts.networking.WebsocketClient;
 
 public class RobotContainer {
 
-	private RobotConnector connector;
+	private RobotConnector connector = new RobotConnector();
 	public RobotController controller;
 	private ClientAndServerCreator clientServerCreator;
 	

@@ -48,11 +48,16 @@ public class Main {
 	
 	public static void main(String[] args)	{
 		JavaGui gui = new JavaGui();
-		String ipToServer = "";  //TODO: fill in the server ip
+		String ipToServer = "";  //fill in the server ip
+		String bluetoothAddr = ""; //fill in this to connect without device search
 		
 		RobotContainer robotContainer = new RobotContainer();
 		
 		//Adding the button listeners to the buttons
+		if(bluetoothAddr.isEmpty())
+			gui.addConnectButtonHandler(new ConnectButtonHandler(robotContainer));
+		else
+			gui.addConnectButtonHandler(new ConnectButtonHandler(robotContainer, bluetoothAddr));
 		gui.addForwardButtonHandler(new ForwardButtonHandler(robotContainer.controller));
 		gui.addBackwardButtonHandler(new BackwardButtonHandler(robotContainer.controller));
 		gui.addLeftButtonHandler(new LeftButtonHandler(robotContainer.controller));
@@ -60,7 +65,6 @@ public class Main {
 		gui.addChangeColorButtonHandler(new ChangeColorButtonHandler(robotContainer.controller));
 		gui.addSpinButtonHandler(new SpinButtonHandler(robotContainer.controller));
 		gui.addStopButtonHandler(new StopButtonHandler(robotContainer.controller));
-		gui.addConnectButtonHandler(new ConnectButtonHandler(robotContainer));
 		gui.addAddRobotsToArrayButtonHandler(new AddRobotsToArrayButtonHandler(robotContainer));
 		gui.addClientButtonHandler(new MakeClientButtonHandler(robotContainer, ipToServer));
 		gui.addServerButtonHanlder(new MakeServerButtonHandler(robotContainer));

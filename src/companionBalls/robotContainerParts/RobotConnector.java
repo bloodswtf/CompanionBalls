@@ -19,6 +19,7 @@ import se.nicklasgavelin.sphero.response.information.DataResponse;
 
 /** 
  * Derived from the ConnectThread example from Nicklas Gavelin
+ * https://github.com/nicklasgav/Sphero-Desktop-API/blob/master/src/se/nicklasgavelin/sphero/example/Example_Site_API.java
  * 
  */
 
@@ -28,10 +29,15 @@ public class RobotConnector extends Thread implements BluetoothDiscoveryListener
 	private int responses = 0;
 	Robot r;
 	private Bluetooth bt;
-	String bluetoothAddress;
+	String bluetoothAddress = "";
 	private boolean stop = false;
 	public ArrayList<Robot> robots;
 
+	public RobotConnector()
+	{
+		this.robots = new ArrayList<Robot>();
+	}
+	
 	public RobotConnector(String bluetoothAddress)
 	{
 		this.robots = new ArrayList<Robot>();
@@ -63,50 +69,32 @@ public class RobotConnector extends Thread implements BluetoothDiscoveryListener
 	{
 		try
 		{
-			// Will perform a bluetooth discovery before connecting to
-			// any devices
-			bt = new Bluetooth( this, Bluetooth.SERIAL_COM );
-			//				bt.discover(); // # COMMENT THIS IF UNCOMMENTING THE BELOW AREA #
-			// Uncomment the code below and comment out the bt.discover() line above
-			// to
-			// connect directly to a given Sphero
-
-			// // ## START UNCOMMENT ##
-			// String bluetoothAddress = "000666440DB8";
-
-			BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
-					bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
-
-			// Create the robot from the bluetooth device
-			r = new Robot( btd );
-
-			// Try to connect to the robot
-			if ( r.connect() )
-			{
-				// Add ourselves as listeners
-				r.addListener( this );
-
-				// Send a rgb transition command macro
-				r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
-
-				// Send a direct command
-				r.sendCommand( new FrontLEDCommand( 1F ) );
-
-				robots.add(r);
+			if(bluetoothAddress.isEmpty())	{
+				bt = new Bluetooth( this, Bluetooth.SERIAL_COM );
+				bt.discover();
 			}
-			// ## END UNCOMMENT ##
+			else	{
+				BluetoothDevice btd = new BluetoothDevice( bt, "btspp://" +
+						bluetoothAddress + ":1;authenticate=true;encrypt=false;master=false" );
 
-			// Run forever, euheuheuh!
-			//				while( !stop )
-			//				{
-			//					try
-			//					{
-			//						Thread.sleep( 5000 );
-			//					}
-			//					catch( InterruptedException e )
-			//					{
-			//					}
-			//				}
+				// Create the robot from the bluetooth device
+				r = new Robot( btd );
+
+				// Try to connect to the robot
+				if ( r.connect() )
+				{
+					// Add ourselves as listeners
+					r.addListener( this );
+
+					// Send a rgb transition command macro
+					r.rgbTransition( 255, 0, 0, 0, 255, 255, 50 );
+
+					// Send a direct command
+					r.sendCommand( new FrontLEDCommand( 1F ) );
+
+					robots.add(r);
+				}
+			}
 		}
 		catch( Exception e )
 		{
@@ -182,7 +170,6 @@ public class RobotConnector extends Thread implements BluetoothDiscoveryListener
 		if( robots.isEmpty() )
 		{
 			this.stopThread();
-			//TODO
 			//setConnectEnabled( true );
 			//This might be used
 		}
