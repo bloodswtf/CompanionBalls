@@ -81,7 +81,7 @@ public class JavaGui extends JFrame {
 	// the buttons
 	private JButton ForwardB, BackwardB, RightB, LeftB,
 	StopB, SpinB, ChangeColorB,
-	ConnectB, AddRobotsToListB, DisconnectB,
+	ConnectB, DisconnectB,
 	AddrobottoArrayB, B2B, ServerB, ClientB
 	;
 
@@ -220,7 +220,7 @@ public class JavaGui extends JFrame {
 		DisconnectB.addActionListener(actionListener);
 	}
 	public void addAddRobotsToArrayButtonHandler(ActionListener actionListener)		{
-		AddRobotsToListB.addActionListener(actionListener);
+		AddrobottoArrayB.addActionListener(actionListener);
 	}
 	public void addServerButtonHanlder(ActionListener actionListener)	{
 		ServerB.addActionListener(actionListener);

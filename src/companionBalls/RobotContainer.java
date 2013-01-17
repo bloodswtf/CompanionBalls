@@ -8,14 +8,15 @@ import companionBalls.robotContainerParts.networking.WebsocketClient;
 
 public class RobotContainer {
 
-	private RobotConnector connector = new RobotConnector();
-	public RobotController controller;
+	private RobotConnector connector;
+	public RobotController controller = new RobotController();
 	private ClientAndServerCreator clientServerCreator;
 	
 	/**
 	 * Starts a device search and if a Sphero is found then it's connected and stored in the RobotConnector
 	 */
 	public void searchAndConnectToSphero()	{
+		connector = new RobotConnector();
 		connector.start();
 	}
 	
@@ -26,6 +27,8 @@ public class RobotContainer {
 	 */
 	public void connectToSphero(String bluetoothId)	{
 		connector = new RobotConnector(bluetoothId);
+		connector.start();
+		System.out.println("Connecting to: " + bluetoothId);
 	}
 	
 	/**
@@ -34,7 +37,8 @@ public class RobotContainer {
 	//TODO(For the far future): Remove this in the future and make the search and connect methods do this instead. 
 	//Need some thing that checks if all the threads started by Bluetooth discover has finnished
 	public void finilizeConnection()	{
-		controller = new RobotController(connector.getRobotArray().get(0));
+		controller.addRobot(connector.getRobotArray().get(0));
+		System.out.println("Robot added, redy to controll");
 	}
 	
 	public void startClient(String ipToServer)	{

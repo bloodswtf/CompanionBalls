@@ -49,7 +49,8 @@ public class Main {
 	public static void main(String[] args)	{
 		JavaGui gui = new JavaGui();
 		String ipToServer = "";  //fill in the server ip
-		String bluetoothAddr = ""; //fill in this to connect without device search
+//		String bluetoothAddr = "";
+		String bluetoothAddr = "000666440DB8"; //fill in this to connect without device search
 		
 		RobotContainer robotContainer = new RobotContainer();
 		
@@ -65,9 +66,9 @@ public class Main {
 		gui.addChangeColorButtonHandler(new ChangeColorButtonHandler(robotContainer.controller));
 		gui.addSpinButtonHandler(new SpinButtonHandler(robotContainer.controller));
 		gui.addStopButtonHandler(new StopButtonHandler(robotContainer.controller));
-		gui.addAddRobotsToArrayButtonHandler(new AddRobotsToArrayButtonHandler(robotContainer));
 		gui.addClientButtonHandler(new MakeClientButtonHandler(robotContainer, ipToServer));
 		gui.addServerButtonHanlder(new MakeServerButtonHandler(robotContainer));
+		gui.addAddRobotsToArrayButtonHandler(new AddRobotsToArrayButtonHandler(robotContainer));
 	}
 }
 

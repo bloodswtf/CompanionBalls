@@ -19,8 +19,11 @@ public class RobotController {
 	private Robot r;
 	private int heading=0;
 	private double speed= 0.1;
+	private double buttonTapSpeed = 0.3; //Sets the speed for the commands started by the button presses
 	private double backwardSpeed = -0.1;
 
+	public RobotController(){}
+	
 	public RobotController(Robot spheroRobot){
 		this.r = spheroRobot;
 	}
@@ -28,6 +31,10 @@ public class RobotController {
 	public RobotController(Robot spheroRobot, RobotListener robotSensorListener){
 		this.r = spheroRobot;
 		r.addListener(robotSensorListener);
+	}
+	
+	public void addRobot(Robot spheroRobot)	{
+		this.r = spheroRobot;
 	}
 	
 	public void addSensonListener(RobotListener robotListener)	{
@@ -59,7 +66,7 @@ public class RobotController {
 	}
 	public void rollForward()	{
 		MacroObject m = new MacroObject();
-		m.addCommand(new Roll(speed, heading,0));
+		m.addCommand(new Roll(buttonTapSpeed, heading,0));
 		r.sendCommand(m);
 	}
 	public void rollBackwards()	{
@@ -75,13 +82,13 @@ public class RobotController {
 	public void rollLeft()	{
 		MacroObject m = new MacroObject();
 		heading = (heading+330)%360;
-		m.addCommand(new Roll(speed, heading, 0));
+		m.addCommand(new Roll(buttonTapSpeed, heading, 0));
 		r.sendCommand(m);
 	}
 	public void rollRight()	{
 		MacroObject m = new MacroObject();
 		heading = (heading+30)%360;
-		m.addCommand(new Roll(speed, heading, 0));
+		m.addCommand(new Roll(buttonTapSpeed, heading, 0));
 		r.sendCommand(m);
 	}
 	public void spinLeftCommand()	{
