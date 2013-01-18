@@ -30,21 +30,6 @@ public class WebsocketServer extends Thread
 		} catch (IOException e) {e.printStackTrace();}
 		System.out.println("Just got connected by " + server.getRemoteSocketAddress());
 
-		/*
-           DataInputStream in =
-                  new DataInputStream(server.getInputStream());
-
-            System.out.println(in.readUTF());
-            DataInputStream in2 =
-                    new DataInputStream(server.getInputStream());
-              System.out.println(in2.readUTF());
-            DataOutputStream out =
-                 new DataOutputStream(server.getOutputStream());
-            out.writeUTF("Thank you for connecting to "
-              + server.getLocalSocketAddress() + "\nGoodbye!");
-
-            server.close();*/
-
 	}
 	
 	/**

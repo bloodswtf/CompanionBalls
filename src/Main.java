@@ -24,33 +24,12 @@ import companionBalls.robotContainerParts.RobotController;
 public class Main {
 	
 	
-//	public static void main(String[] args) {
-//		//Example_Site_API example = new Example_Site_API();
-//		// new Thread( new Example_Site_API() ).start();
-//		//	DirectionalKeysPanel DKP = null;// = new DirectionalKeysPanel();if( ct != null )
-//		//ct.stopThread();
-//		// Create a new thread
-//		//		ConnectThread ct = new ConnectThread();
-//		//		ct.start();
-//		//		while(ct.getRobotArray().size()==0){}
-//		
-//		String bluetoothAddress = "000666440DB8"; //NEW , WBG
-//		//String bluetoothAddress = "0006664438B8"; //OLD, BBR
-//		String ConnectToIP = "130.240.95.209";
-//		
-//		GurrUI gurrui = new GurrUI(new ConnectThread(bluetoothAddress), ConnectToIP);
-//		gurrui.fixGUI();
-//		
-//		
-//		//backgroundvariables, do not touch
-//		//server sends commands - clients recieves and does them	
-//	}
-	
 	public static void main(String[] args)	{
 		JavaGui gui = new JavaGui();
-		String ipToServer = "";  //fill in the server ip
+		String ipToServer = "130.240.108.209";  //fill in the server ip
 //		String bluetoothAddr = "";
 		String bluetoothAddr = "0006664438B8"; //For Sphero-BBR
+//		String bluetoothAddr = "000666440DB8"; //For Sphero-WBG
 		
 		RobotContainer robotContainer = new RobotContainer();
 		

@@ -35,10 +35,10 @@ public class RobotContainer {
 	 * Takes the Robot object from RobotConnector and makes it controllable by adding it to the RobotController object
 	 */
 	//TODO(For the far future): Remove this in the future and make the search and connect methods do this instead. 
-	//Need some thing that checks if all the threads started by Bluetooth discover has finnished
+	//Need some thing that checks if all the threads started by Bluetooth discover has finished
 	public void finilizeConnection()	{
 		controller.addRobot(connector.getRobotArray().get(0));
-		System.out.println("Robot added, redy to controll");
+		System.out.println("Robot added, ready to control");
 	}
 	
 	public void startClient(String ipToServer)	{
@@ -58,5 +58,6 @@ public class RobotContainer {
 	public void startServer()	{
 		clientServerCreator = new ClientAndServerCreator("leavethisempty", 0, 8080);
 		controller.addSensonListener(new RobotSensorListener(clientServerCreator.getWebsocketServer()));
+		controller.getDataFromSensors();
 	}
 }
