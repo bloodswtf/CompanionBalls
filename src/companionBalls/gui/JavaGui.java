@@ -33,7 +33,7 @@ import companionBalls.robotContainerParts.RobotController;
 
 public class JavaGui extends JFrame {
 	// Dimensions
-	private static final int windowWIDTH = 760;
+	private static final int windowWIDTH = 700;
 	private static final int windowHEIGHT =200;
 
 	//String ButtonsMapping
@@ -73,7 +73,7 @@ public class JavaGui extends JFrame {
 
 	//TODO: change this button so it says "Finilize Connection"
 	private static String AddrobottoArray = "Add Robots To Array";
-	private static String B2 = "Get some kind of response";
+	private static String B2 = "Get response from gyro";
 	private static String Server = "THIS IS SERVER";
 	private static String Client = "ohh, and I am client";
 	//end configs
@@ -257,11 +257,11 @@ public class JavaGui extends JFrame {
 	private void addbuttonsConnectDisconnect(Container C){
 		C.add(ConnectB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
-		C.add(ServerB);
-		C.add(Box.createRigidArea(new Dimension(0, 5)));
 		C.add(AddrobottoArrayB);
 		C.add(Box.createRigidArea(new Dimension(0, 5)));
-		C.add(DisconnectB);
+		C.add(DisconnectB);		
+		C.add(Box.createRigidArea(new Dimension(0, 5)));
+		C.add(ServerB);
 	}
 
 	private void addbuttonsB14(Container C){

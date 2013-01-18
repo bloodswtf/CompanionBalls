@@ -20,7 +20,6 @@ public class RobotSensorListener implements se.nicklasgavelin.sphero.RobotListen
 	DataResponse dr;
 	WebsocketServer ws;
 
-	//TODO: put a network thingy in the constructor
 	public RobotSensorListener(WebsocketServer ws)	{
 		//if (ws!=null)
 		this.ws=ws;

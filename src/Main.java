@@ -50,7 +50,7 @@ public class Main {
 		JavaGui gui = new JavaGui();
 		String ipToServer = "";  //fill in the server ip
 //		String bluetoothAddr = "";
-		String bluetoothAddr = "000666440DB8"; //fill in this to connect without device search
+		String bluetoothAddr = "0006664438B8"; //For Sphero-BBR
 		
 		RobotContainer robotContainer = new RobotContainer();
 		
