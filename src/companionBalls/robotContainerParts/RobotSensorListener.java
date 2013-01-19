@@ -42,13 +42,8 @@ public class RobotSensorListener implements se.nicklasgavelin.sphero.RobotListen
 		dr = ( DataResponse ) response;
 
 		byte[] data = dr.getSensorData();
-		System.out.print("Roll: " + data[1]+" ");
-		System.out.print("Pitch: " + data[3]+" ");
-		System.out.print("Yaw: " + data[5]+" ");
 		DirectionCalculation dc = new DirectionCalculation();
 		dc.calcDirection((int)(data[1]), (int)(data[3]));
-		System.out.println("Heading "+dc.getHeading());
-		System.out.println("  Speed "+dc.getSpeed()+"/n");
 		int heading = dc.getHeading();
 		double speed = dc.getSpeed();
 		try {
