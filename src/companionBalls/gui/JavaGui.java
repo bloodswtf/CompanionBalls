@@ -72,7 +72,7 @@ public class JavaGui extends JFrame {
 	private static String Disconnect = "Disconnect ALL THE THINGS";
 
 	//TODO: change this button so it says "Finilize Connection"
-	private static String AddrobottoArray = "Add Robots To Array";
+	private static String AddrobottoArray = "Initialize Robot Controller";
 	private static String B2 = "Get response from gyro";
 	private static String Server = "THIS IS SERVER";
 	private static String Client = "ohh, and I am client";
